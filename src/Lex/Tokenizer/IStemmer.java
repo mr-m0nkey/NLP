@@ -9,7 +9,7 @@ package Lex.Tokenizer;
  *
  * @author mayowa
  */
-public interface Stemmer {
+public interface IStemmer {
 
     /**
      *

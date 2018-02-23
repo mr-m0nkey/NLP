@@ -1,7 +1,7 @@
 package Lex.Tokenizer;
 
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /*
@@ -14,10 +14,10 @@ import java.util.Map;
  *
  * @author mayowa
  */
-public interface Tokenizer {
+public interface ITokenizer {
     
-    public ArrayList<Token> getTokens();
-    public ArrayList<Token> getTokens(Map<String, String> map);
+    public List<Token> getTokens();
+    public List<Token> getTokens(Map<String, String> map);
     
     public String getCorpus();
     

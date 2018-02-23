@@ -5,13 +5,13 @@
  */
 package Lex.English.Stemmers;
 
-import Lex.Tokenizer.Stemmer;
+import Lex.Tokenizer.IStemmer;
 
 /**
  *
  * @author mayowa
  */
-public class PortersStemmer implements Stemmer{
+public class PortersStemmer implements IStemmer{
     
     //singleton class
     private PortersStemmer(){

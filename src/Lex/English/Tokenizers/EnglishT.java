@@ -6,22 +6,22 @@
 package Lex.English.Tokenizers;
 
 import Lex.Tokenizer.Token;
-import Lex.Tokenizer.Tokenizer;
-import java.util.ArrayList;
+import Lex.Tokenizer.ITokenizer;
+import java.util.List;
 import java.util.Map;
 
 /**
  *
  * @author mayowa
  */
-public abstract class EnglishT implements Tokenizer{
+public abstract class EnglishT implements ITokenizer{
 
     /**
      *
      * @return
      */
     @Override
-    public abstract  ArrayList<Token> getTokens();
+    public abstract  List<Token> getTokens();
 
     /**
      *
@@ -29,7 +29,7 @@ public abstract class EnglishT implements Tokenizer{
      * @return
      */
     @Override
-    public abstract ArrayList<Token> getTokens(Map<String, String> map);
+    public abstract List<Token> getTokens(Map<String, String> map);
 
     /**
      *
