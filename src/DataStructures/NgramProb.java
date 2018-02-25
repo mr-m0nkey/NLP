@@ -3,18 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Lex.Tokenizer;
+package DataStructures;
 
 /**
  *
  * @author mayowa
  */
-public class Token {
+public class NgramProb {
     
-    public final String word_form;
+    final int n;
     
-    public Token(String word){
-        word_form = word;
+    public NgramProb(int n){
+        this.n = n;
     }
     
+   
 }

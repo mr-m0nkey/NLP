@@ -3,18 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Lex.Tokenizer;
+package DataStructures;
 
 /**
  *
  * @author mayowa
  */
-public class Token {
+class Edge {
     
-    public final String word_form;
+    final private Vertex u;
+    final private Vertex v;
+    int count = 1;
+    float prob;
     
-    public Token(String word){
-        word_form = word;
+    Edge(Vertex u, Vertex v){
+        this.u = u;
+        this.v = v;
     }
     
 }

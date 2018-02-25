@@ -36,7 +36,7 @@ public class EnglishTokenizer extends EnglishT{
     @Override
     public List<Token> getTokens() {
         String tempText;
-        final String EOS = "<E-O-S> <B-O-S>";
+        final String EOS = " <E-O-S> <B-O-S> ";
         tempText = this.text
                 .replaceAll("'m", " am")
                 .replaceAll("won't", "will not")
@@ -45,9 +45,9 @@ public class EnglishTokenizer extends EnglishT{
                 .replaceAll("n't", " not")
                 .replaceAll("'ll", " will")
                 .replaceAll("'d", " would")
-                .replace("!", " <E-O-S>")
+                .replace("!", EOS)
                 .replace("\n", " ")
-                .replace("/?", " <E-O-S>");
+                .replace("?", EOS);
         
         //TODO: Find <E-O-S>
         
@@ -56,6 +56,10 @@ public class EnglishTokenizer extends EnglishT{
             if(a[i].length() > 0){
                 tokens.add(new Token(a[i]));
             }
+        }
+       System.out.println(tokens.get(tokens.size() - 1).word_form);
+        if(tokens.get(tokens.size() - 1).word_form.equals("<B-O-S>")){
+            tokens.remove(tokens.size() - 1);
         }
         List<Token> temp = Collections.synchronizedList(new LinkedList<Token>());
         temp.addAll(tokens);
