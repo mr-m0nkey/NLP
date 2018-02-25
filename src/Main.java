@@ -1,4 +1,5 @@
 
+import DataStructures.NgramGraph;
 import Lex.English.Tokenizers.EnglishTokenizer;
 import Lex.Tokenizer.Token;
 import java.io.FileNotFoundException;
@@ -24,16 +25,22 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void main(String[] args) throws FileNotFoundException, IOException{
         // TODO code application logic here
+        
+        
+        
+        
         EnglishTokenizer a = new EnglishTokenizer("What are you doing?");
         Map<String, String> map = new HashMap();
         map.put(".", "");
         map.put("*", "");
         List<Token> t;
         t = a.getTokens();
+        NgramGraph g = new NgramGraph(2, t);
         t.stream().forEach((t1) -> {
             System.out.println(t1.word_form);
+            g.AddVertex(t1);
         });
         
         

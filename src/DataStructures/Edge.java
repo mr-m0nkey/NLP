@@ -21,4 +21,8 @@ class Edge {
         this.v = v;
     }
     
+    void increaseWeight(){
+        count++;
+    }
+    
 }
