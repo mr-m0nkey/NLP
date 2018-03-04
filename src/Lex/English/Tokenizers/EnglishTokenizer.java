@@ -5,7 +5,6 @@
  */
 package Lex.English.Tokenizers;
 
-import Lex.Tokenizer.Token;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,7 +19,7 @@ import java.util.Map;
 public class EnglishTokenizer extends EnglishT{
     
     private final String text;
-    List<Token> tokens = new ArrayList();
+    List<String> tokens = new ArrayList();
 
 
     public EnglishTokenizer(String text){
@@ -34,7 +33,7 @@ public class EnglishTokenizer extends EnglishT{
     }
     
     @Override
-    public List<Token> getTokens() {
+    public List<String> getTokens() {
         String tempText;
         final String EOS = " </s> <s> ";
         tempText = this.text
@@ -52,23 +51,24 @@ public class EnglishTokenizer extends EnglishT{
         //TODO: Find </s>
         
         String[] a  = tempText.split(" ");
+        tokens.add("<s>");
         for (int i = 0; i < a.length; i++) {
             if(a[i].length() > 0){
-                tokens.add(new Token(a[i]));
+                tokens.add(a[i]);
             }
         }
-       System.out.println(tokens.get(tokens.size() - 1).word_form);
-        if(tokens.get(tokens.size() - 1).word_form.equals("<s>")){
+        
+        if(tokens.get(tokens.size() - 1).equals("<s>")){
             tokens.remove(tokens.size() - 1);
         }
-        List<Token> temp = Collections.synchronizedList(new LinkedList<Token>());
+        List<String> temp = Collections.synchronizedList(new LinkedList<String>());
         temp.addAll(tokens);
         return temp;
     }
     
     
     @Override
-    public ArrayList<Token> getTokens(Map<String, String> map) {
+    public ArrayList<String> getTokens(Map<String, String> map) {
         String tempText = this.text;
         for(String s : map.keySet()){
             tempText = tempText.replace(s, map.get(s));
@@ -77,10 +77,10 @@ public class EnglishTokenizer extends EnglishT{
         String[] a  = tempText.split(" ");
         for (int i = 0; i < a.length; i++) {
             if(a[i].length() > 0 && !a[i].equals(null)){
-                tokens.add(new Token(a[i]));
+                tokens.add(a[i]);
             }
         }
-        ArrayList<Token> temp = new ArrayList<>();
+        ArrayList<String> temp = new ArrayList<>();
         temp.addAll(tokens);
         return temp;
     }

@@ -1,7 +1,6 @@
 
 import DataStructures.NgramGraph;
 import Lex.English.Tokenizers.EnglishTokenizer;
-import Lex.Tokenizer.Token;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
@@ -31,17 +30,20 @@ public class Main {
         
         
         
-        EnglishTokenizer a = new EnglishTokenizer("What are you doing?");
+        EnglishTokenizer a = new EnglishTokenizer("What are you doing?"
+                + "Eh?"
+                + "What is your name is is and What do you do?"
+                + "What are they here for ?");
         Map<String, String> map = new HashMap();
         map.put(".", "");
         map.put("*", "");
-        List<Token> t;
+        List<String> t;
         t = a.getTokens();
-        NgramGraph g = new NgramGraph(2, t);
         t.stream().forEach((t1) -> {
-            System.out.println(t1.word_form);
-            g.AddVertex(t1);
+            //System.out.println(t1.word_form);
         });
+        NgramGraph bigram = new NgramGraph(2, t);
+        System.out.println(bigram.getProb("your", "is"));
         
         
         

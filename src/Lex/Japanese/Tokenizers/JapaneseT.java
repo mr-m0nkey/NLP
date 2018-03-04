@@ -5,7 +5,6 @@
  */
 package Lex.Japanese.Tokenizers;
 
-import Lex.Tokenizer.Token;
 import Lex.Tokenizer.ITokenizer;
 import java.util.ArrayList;
 import java.util.Map;
@@ -21,7 +20,7 @@ public abstract class JapaneseT implements ITokenizer{
      * @return
      */
     @Override
-    public abstract  ArrayList<Token> getTokens();
+    public abstract  ArrayList<String> getTokens();
 
     /**
      *
@@ -29,7 +28,7 @@ public abstract class JapaneseT implements ITokenizer{
      * @return
      */
     @Override
-    public abstract ArrayList<Token> getTokens(Map<String, String> map);
+    public abstract ArrayList<String> getTokens(Map<String, String> map);
 
     /**
      *

@@ -5,8 +5,8 @@
  */
 package DataStructures;
 
-import Lex.Tokenizer.Token;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -14,16 +14,34 @@ import java.util.ArrayList;
  */
 class Vertex {
     
-    Token token;
+    private String token;
+    private int count = 1;
     
-    Vertex(Token t){
+    Vertex(String t){
         this.token = t;
     }
     
-    private ArrayList<Edge> edges = new ArrayList();
+    Map<String, Edge> edges = new HashMap();
     
     public void addEdge(Vertex v){
-        edges.add(new Edge(this, v));
+        if(edges.containsKey(v.token)){
+            edges.get(v.token).increaseWeight();
+        }else{
+            edges.put(v.token, new Edge(this, v));
+        }
+    }
+    
+    public void addCount(){
+        count++;
+    }
+    
+    public int getCount(){
+        return count;
+    }
+    
+    @Override
+    public String toString(){
+        return "Word: " + this.token;             
     }
     
 }

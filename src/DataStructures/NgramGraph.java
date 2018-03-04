@@ -5,9 +5,9 @@
  */
 package DataStructures;
 
-import Lex.Tokenizer.Token;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -15,11 +15,12 @@ import java.util.List;
  */
 public class NgramGraph {
     
-    private ArrayList<Vertex> vertices = new ArrayList();
+    //private ArrayList<Vertex> vertices = new ArrayList();
+    Map<String, Vertex> vertices = new HashMap();
     final private int n;
-    private List<Token> tokens;
+    private List<String> tokens;
     
-    public NgramGraph(int n, List<Token> t) throws IllegalArgumentException{
+    public NgramGraph(int n, List<String> t) throws IllegalArgumentException{
         if(n < 2){
             throw new IllegalArgumentException();
         }
@@ -29,40 +30,53 @@ public class NgramGraph {
     }
     
     //public methods
-    public float getProb(Token first, Token second){
+    public float getProb(String second, String first){
+        //TODO: fix null pointer exception
         float prob = 0;
-        
+        prob = (float)(vertices.get(second).edges.get(first).count/vertices.get(second).getCount());
         return prob;
     }
     
     
     //private methods
-    private boolean AddVertex(Token t){
-        if(vertices.contains(t)){
-            
-            return true;
+    private void addVertex(String bt, String t){
+        
+        Vertex pre = null;
+        if(vertices.containsKey(bt)){
+            pre = vertices.get(bt);
         }else{
-            Vertex v = new Vertex(t); 
-            vertices.stream().forEach((vertex) -> {
-                vertex.addEdge(v);
-            });
-            vertices.add(v);
-            return false;
+            pre = new Vertex(bt);
+        }
+        
+        if(vertices.containsKey(t)){
+            vertices.get(t).addEdge(pre);
+            vertices.get(t).addCount();
+        }else{
+            vertices.put(t, new Vertex(t));
+            vertices.get(t).addEdge(pre);
         }
     }
     
     private void build(){
         
+        for(int i = 0; i < tokens.size(); i++){
+            if(i >= n -1){
+                addVertex(tokens.get(i - 1), tokens.get(i));
+            }else{
+                addVertex(null, tokens.get(i));
+            }
+            
+        } 
     }
     
     
     //overriden methods
-    @Override
+    /*@Override
     public String toString(){
         String output = new String();
         //TODO: Implement
         
         
         return output;
-    }
+    }*/
 }

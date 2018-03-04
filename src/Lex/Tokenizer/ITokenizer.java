@@ -16,8 +16,8 @@ import java.util.Map;
  */
 public interface ITokenizer {
     
-    public List<Token> getTokens();
-    public List<Token> getTokens(Map<String, String> map);
+    public List<String> getTokens();
+    public List<String> getTokens(Map<String, String> map);
     
     public String getCorpus();
     
