@@ -25,4 +25,8 @@ class Edge {
         count++;
     }
     
+    int getWeight(){
+        return count;
+    }
+    
 }
