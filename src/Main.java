@@ -52,7 +52,7 @@ public class Main {
             //System.out.println(t1);
         });
         System.out.println("Pos scan complete");
-        NgramProb bigram = new NgramProb(3, t);
+        NgramProb bigram = new NgramProb(2, t);
         System.out.println("Pos build complete");
         bigram.getNext(new EnglishTokenizer(review).getTokens(), 1);
 

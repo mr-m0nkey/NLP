@@ -59,6 +59,7 @@ public class NgramProb {
     
     
     public String getNext(List<String> text, int n){
+        String next = "";
         String t = "";
         for(int i = text.size() - (this.n - 1); i < text.size(); i++){
             if(i == text.size() - 1){
@@ -83,8 +84,9 @@ public class NgramProb {
             }
             counter++;
         }
-        
-        return highest;
+        System.out.println(t);
+        System.out.println(highest);
+        return next;
     }
     
     
@@ -156,7 +158,7 @@ public class NgramProb {
         }
         
         
-    
+    //System.out.println(vertices.get("film").edges.keySet());
     }
     
     
