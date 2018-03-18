@@ -9,7 +9,7 @@ package DataStructures;
  *
  * @author mayowa
  */
-class Edge {
+public class Edge {
     
     final private Vertex u;
     final private Vertex v;
@@ -25,7 +25,7 @@ class Edge {
         count++;
     }
     
-    int getWeight(){
+    public int getWeight(){
         return count;
     }
     

@@ -6,11 +6,15 @@
 package Lex.English.Tokenizers;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,50 +23,90 @@ import java.util.Map;
 public class EnglishTokenizer extends EnglishT{
     
     private final String text;
+    private final File file;
+    private final boolean mode;
     List<String> tokens = new ArrayList();
 
 
     public EnglishTokenizer(String text){
+        this.mode = true;
         this.text = text;
+        file = new File("");
     }
     
     public EnglishTokenizer(File f){
-        String tempText = "";
-        //get text from file and put it in this.text
-        this.text = tempText;
+        mode = false;
+        this.text = "";
+        this.file = f;
     }
     
     @Override
     public List<String> getTokens() {
-        String tempText;
-        final String EOS = " </s> <s> ";
-        tempText = this.text
-                .replaceAll("'m", " am")
-                .replaceAll("won't", "will not")
-                .replaceAll("can't", "can not")
-                .replaceAll("shan't", "shall not")
-                .replaceAll("n't", " not")
-                .replaceAll("'ll", " will")
-                .replaceAll("'d", " would")
-                .replace("!", EOS)
-                .replace("\n", " ")
-                .replace("?", EOS);
-        
-        //TODO: Find </s>
-        
-        String[] a  = tempText.split(" ");
-        tokens.add("<s>");
-        for (int i = 0; i < a.length; i++) {
-            if(a[i].length() > 0){
-                tokens.add(a[i]);
-            }
-        }
-        
-        if(tokens.get(tokens.size() - 1).equals("<s>")){
-            tokens.remove(tokens.size() - 1);
-        }
         List<String> temp = Collections.synchronizedList(new LinkedList<String>());
-        temp.addAll(tokens);
+        final String EOS = " </s> <s> ";
+        if(mode == true){
+            String tempText;
+            
+            tempText = this.text
+                    .replaceAll("'m", " am")
+                    .replaceAll("won't", "will not")
+                    .replaceAll("can't", "can not")
+                    .replaceAll("shan't", "shall not")
+                    .replaceAll("n't", " not")
+                    .replaceAll("'ll", " will")
+                    .replaceAll("'d", " would")
+                    .replace("!", EOS)
+                    .replace("\n", " ")
+                    .replace("?", EOS);
+
+            //TODO: Find </s>
+
+            String[] a  = tempText.split("\\s+");
+            tokens.add("<s>");
+            for (int i = 0; i < a.length; i++) {
+                if(a[i].length() > 0){
+                    tokens.add(a[i]);
+                }
+            }
+
+            if(tokens.get(tokens.size() - 1).equals("<s>")){
+                tokens.remove(tokens.size() - 1);
+            }
+            //tokens.add("</s>");
+            temp.addAll(tokens);
+
+        }else{
+            try {
+                Scanner input = new Scanner(this.file);
+                temp.add("<s>");
+                while(input.hasNext()){
+                    String tempString = input.next();
+                    tempString
+                            .replaceAll("'m", " am")
+                            .replaceAll("won't", "will not")
+                            .replaceAll("can't", "can not")
+                            .replaceAll("shan't", "shall not")
+                            .replaceAll("n't", " not")
+                            .replaceAll("'ll", " will")
+                            .replaceAll("'d", " would")
+                            .replace("!", EOS)
+                            .replace("\n", " ")
+                            .replace("?", EOS)
+                            .replace("\\W", " ")
+                            .trim();
+                    if(tempString.length() > 0){
+                        temp.add(tempString);
+                    }
+                    
+                }
+                input.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(EnglishTokenizer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+        }
+        
         return temp;
     }
     

@@ -12,22 +12,22 @@ import java.util.Map;
  *
  * @author mayowa
  */
-class Vertex {
+public class Vertex {
     
     private String token;
     private int count = 1;
     
-    Vertex(String t){
+    public Vertex(String t){
         this.token = t;
     }
     
-    Map<String, Edge> edges = new HashMap();
+    public Map<String, Edge> edges = new HashMap();
     
-    public void addEdge(Vertex v){
-        if(edges.containsKey(v.token)){
-            edges.get(v.token).increaseWeight();
+    public void addEdge(String s){
+        if(edges.containsKey(s)){
+            edges.get(s).increaseWeight();
         }else{
-            edges.put(v.token, new Edge(this, v));
+            edges.put(s, new Edge(this, new Vertex(s)));
         }
     }
     
