@@ -6,8 +6,9 @@
 package Lex.Japanese.Tokenizers;
 
 import Lex.Tokenizer.ITokenizer;
-import java.util.ArrayList;
-import java.util.Map;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.List;
 
 /**
  *
@@ -20,20 +21,10 @@ public abstract class JapaneseT implements ITokenizer{
      * @return
      */
     @Override
-    public abstract  ArrayList<String> getTokens();
-
-    /**
-     *
-     * @param map
-     * @return
-     */
+    public abstract  List<String> getTokens(String text);
+    
+    
     @Override
-    public abstract ArrayList<String> getTokens(Map<String, String> map);
+    public abstract  List<String> getTokens(File file) throws FileNotFoundException;
 
-    /**
-     *
-     * @return
-     */
-    @Override
-    public abstract String getCorpus();
 }

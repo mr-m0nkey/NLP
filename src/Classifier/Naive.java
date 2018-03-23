@@ -3,25 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Lex.Tokenizer;
+package Classifier;
 
 /**
  *
  * @author mayowa
  */
-public class Token {
-    
-    /**
-     *
-     */
-    public final String word_form;
-    
-    /**
-     *
-     * @param word
-     */
-    public Token(String word){
-        word_form = word;
-    }
+public class Naive {
     
 }

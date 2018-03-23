@@ -17,12 +17,26 @@ public class Vertex {
     private String token;
     private int count = 1;
     
+    /**
+     *
+     * @param t
+     */
     public Vertex(String t){
         this.token = t;
+        if(t.equals("<UNK>")){
+            this.count = 0;
+        }
     }
     
+    /**
+     *
+     */
     public Map<String, Edge> edges = new HashMap();
     
+    /**
+     *
+     * @param s
+     */
     public void addEdge(String s){
         if(edges.containsKey(s)){
             edges.get(s).increaseWeight();
@@ -31,10 +45,17 @@ public class Vertex {
         }
     }
     
+    /**
+     *
+     */
     public void addCount(){
         count++;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getCount(){
         return count;
     }

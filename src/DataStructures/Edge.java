@@ -25,6 +25,10 @@ public class Edge {
         count++;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getWeight(){
         return count;
     }

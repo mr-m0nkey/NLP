@@ -19,11 +19,17 @@ import java.util.Map;
  */
 public class NgramProb {
     
-    Map<String, Vertex> vertices = new HashMap();
+    private Map<String, Vertex> vertices = new HashMap();
     final private int n;
     private List<String> tokens;
     private final String unk = "<UNK>";
     
+    /**
+     *
+     * @param n
+     * @param t
+     * @throws IllegalArgumentException
+     */
     public NgramProb(int n, List<String> t) throws IllegalArgumentException{
         if(n < 2){
             throw new IllegalArgumentException();
@@ -31,11 +37,17 @@ public class NgramProb {
         this.n = n;
         this.tokens = t;
         this.build();
-        vertices.put(unk, new Vertex(unk));
+        //vertices.put(unk, new Vertex(unk));
     }
     
     //public methods
-    public float getProb(List<String> text){
+
+    /**
+     *
+     * @param text
+     * @return
+     */
+        public float getProb(List<String> text){
         float prob = 1;
         for(int i = n - 1; i < text.size(); i++){
             String second = text.get(i);
@@ -48,19 +60,23 @@ public class NgramProb {
                 }
                 
             }
+            first = first.trim();
+            second = second.trim();
             
-            
-            System.out.println("First: " + first + " Second: " + second + " Prob: " + prob(first, second));
-            prob *= prob(first, second);
+            //System.out.println("First: " + first + " Second: " + second + " Prob: " + prob(first, second));
+            prob += prob(first, second);
         }
-
         return prob;
     } 
     
-    
+    /**
+     *
+     * @param text
+     * @param n
+     * @return
+     */
     public String getNext(List<String> text, int n){
-        String next = "";
-        String t = "";
+        String t = " ";
         for(int i = text.size() - (this.n - 1); i < text.size(); i++){
             if(i == text.size() - 1){
                 t += text.get(i);
@@ -73,7 +89,7 @@ public class NgramProb {
             t = unk;
         }
         int counter = 0;
-        String highest = "";
+        String highest = " ";
         for(String edge : vertices.get(t).edges.keySet()){
             
             if(counter == 0){
@@ -84,9 +100,10 @@ public class NgramProb {
             }
             counter++;
         }
-        System.out.println(t);
-        System.out.println(highest);
-        return next;
+        //System.out.println("Token: " + t);
+        //System.out.println("Highest" + highest);
+        //System.out.println(vertices.get(unk).edges.size());
+        return highest;
     }
     
     
@@ -100,39 +117,63 @@ public class NgramProb {
     private float prob(String first, String second){
         //TODO: fix null pointer exception
         
-        float num;
-        float den;
-        
-        if(!vertices.containsKey(first)){
-            first = unk;
-            vertices.get(unk).addCount();
-        }
-        
-        den = (float)vertices.get(first).getCount();
+        float num = 1;
+        float den = vertices.size();
         
         try{
-            num = (float)vertices.get(first).edges.get(second).getWeight();
+            num += (float)vertices.get(first).edges.get(second).getWeight();
         }catch(NullPointerException ex){
-            second = unk;
-            vertices.get(first).addEdge(unk);
-            num = (float)vertices.get(first).edges.get(second).getWeight();
+            //System.out.println("SECOND" + second + "SECOND");
+        }
+        
+        try{
+            den += (float)vertices.get(first).getCount();
+           
+        }catch(NullPointerException ex){
+              //          System.out.println("FIRST" + first + "FIRST");
+
+        }
+        //System.out.println("Num: " + num + " Den: " + den);
+        /*
+        if(!vertices.containsKey(first)){
+            //first = unk;
+            vertices.get(unk).addCount();
+            
+            //return 0;
         }
         
         
+        if(vertices.get(first).edges.keySet().contains(second)){
+            
+        }else{
+            if(first.equals(unk)){
+                //vertices.get(first).addEdge(second);
+            }else{
+                //second = unk;
+                //vertices.get(first).addEdge(unk);
+            }
+            
+        }*/
         
         
         
         
-        return num/den;
+        
+        
+        return num;
+        //return  (num/den);
     }
     
     private void build(){
         
         
         for(int i = n - 1; i < tokens.size(); i++){
-            String second = tokens.get(i);
-            String first = "";
-            for(int j = i - (n - 1); j < i; j++){
+            String second = tokens.get(i).toLowerCase();
+            second = second.trim();
+            String first = " ";
+            
+            for(int j = i - (n - 1); j < i; j++){//j = 0
+                //if j >= i - (n - 1)
                 if(j == i - 1){
                     first += tokens.get(j);
                 }else{
@@ -140,15 +181,16 @@ public class NgramProb {
                 }
                 
             }
+            first = first.trim();
             if(i >= n -1){
                 
                 if(vertices.containsKey(first)){
                     vertices.get(first).addCount();
                 }else{
-                    vertices.put(first, new Vertex(second));
+                    vertices.put(first, new Vertex(first));
                     
                 }
-                
+               
             }else{
                 
             }
@@ -156,9 +198,15 @@ public class NgramProb {
             addVertex(first, second);
             
         }
-        
-        
-    //System.out.println(vertices.get("film").edges.keySet());
+        try{
+                    
+//vertices.keySet().stream().forEach((t1) -> {
+            System.out.println(vertices.size());
+     
+  //      });
+        }catch(Exception e){
+            System.out.println("none");
+        }
     }
     
     

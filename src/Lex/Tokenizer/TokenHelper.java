@@ -10,6 +10,12 @@ package Lex.Tokenizer;
  * @author mayowa
  */
 public class TokenHelper {
+
+    /**
+     *
+     * @param word
+     * @return
+     */
     public static String getLemma(String word){
         String lemma = "";
         
