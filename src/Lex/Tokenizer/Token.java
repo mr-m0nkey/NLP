@@ -14,7 +14,7 @@ public class Token {
     /**
      *
      */
-    public final String word_form;
+    private final String word_form;
     
     /**
      *
@@ -22,6 +22,11 @@ public class Token {
      */
     public Token(String word){
         word_form = word;
+    }
+    
+    @Override
+    public String toString(){
+        return this.word_form;
     }
     
 }

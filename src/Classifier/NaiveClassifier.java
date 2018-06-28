@@ -16,20 +16,20 @@ import java.util.Map;
  *
  * @author mayowa
  */
-public class Group {
+public class NaiveClassifier {
     
     private final Map<String, Class> classes;
     private String name;
     private final ITokenizer tokenizer;
     private int no_of_documents = 0;
     
-    public Group(String name){
+    public NaiveClassifier(String name){
         this.classes = new HashMap();
         this.name = name;
         this.tokenizer = new EnglishTokenizer();
     }
     
-    public Group(String name, ITokenizer tokenizer){
+    public NaiveClassifier(String name, ITokenizer tokenizer){
         this.classes = new HashMap();
         this.name = name;
         this.tokenizer = tokenizer;
@@ -52,8 +52,8 @@ public class Group {
         classes.get(name).updateTotal(no_of_documents);
     }
     
-    public double test(File file) throws FileNotFoundException{
-        double prob = 0;
+    public String test(File file) throws FileNotFoundException{
+        //double prob = 0;
         String highest = "";
         double p = 0;
         int count = 0;
@@ -61,11 +61,11 @@ public class Group {
             if(count == 0){
                 count++;
                 p = classes.get(cl).getProb(file);
-                highest = cl + " " + p;
+                highest = cl;
             }
             if(classes.get(cl).getProb(file) > p){
                 p = classes.get(cl).getProb(file);
-                highest = cl + " " + p;
+                highest = cl;
             }else if(classes.get(cl).getProb(file) < p){
                 
             }else{
@@ -73,7 +73,7 @@ public class Group {
             }
         }
         System.out.println(highest);
-        return prob;
+        return highest;
     }
     
     public double test(String text){
@@ -91,5 +91,7 @@ public class Group {
     public void rename(String new_name){
         this.name = new_name;
     }
+    
+    
     
 }

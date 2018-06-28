@@ -17,7 +17,7 @@ import java.util.Map;
  *
  * @author mayowa
  */
-public class NgramProb {
+public class NgramProb implements INgram {
     
     private Map<String, Vertex> vertices = new HashMap();
     final private int n;
