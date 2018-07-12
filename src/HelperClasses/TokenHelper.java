@@ -15,16 +15,15 @@ public class TokenHelper {
     
     
     public static int getMinEditDistence(String first, String second){
-        //TODO: Implement this method
+        first = first.toLowerCase();
+        second = second.toLowerCase();
         int[][] table = new int[first.length() + 1][second.length() + 1];
         
         {
-            //when sec = 0
             for(int sec = 0; sec <= second.length(); sec++){
                 table[0][sec] = sec;
             }
 
-            //when fir = 0
             for(int fir = 0; fir <= first.length(); fir++){
                 table[fir][0] = fir;
             }
@@ -33,7 +32,6 @@ public class TokenHelper {
         
         
         for(int fir = 1; fir <= first.length(); fir++){
-            //System.out.println("Row" + fir);
             for(int sec = 1; sec <= second.length(); sec++){
                 if(first.charAt(fir - 1) != second.charAt(sec - 1)){
                     int left = table[fir - 1][sec];
@@ -44,11 +42,9 @@ public class TokenHelper {
                     int leftUp = table[fir - 1][sec - 1];
                     table[fir][sec] = leftUp;
                 }
-              //              System.out.println(table[fir][sec]);
 
             }
         }
-        //System.out.println(table[0][5]);
         return table[first.length()][second.length()];
     }
     

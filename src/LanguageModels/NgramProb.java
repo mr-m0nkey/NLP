@@ -19,6 +19,7 @@ import java.util.Map;
  */
 public class NgramProb implements INgram {
     
+    
     private Map<String, Vertex> vertices = new HashMap();
     final private int n;
     private List<String> tokens;
@@ -47,8 +48,8 @@ public class NgramProb implements INgram {
      * @param text
      * @return
      */
-        public float getProb(List<String> text){
-        float prob = 1;
+        public double getProb(List<String> text){
+        double prob = 0;
         for(int i = n - 1; i < text.size(); i++){
             String second = text.get(i);
             String first = "";
@@ -64,9 +65,10 @@ public class NgramProb implements INgram {
             second = second.trim();
             
             //System.out.println("First: " + first + " Second: " + second + " Prob: " + prob(first, second));
-            prob += prob(first, second);
+            //System.out.println(vertices.get(first).edges.size());
+            prob += Math.log(prob(first, second));
         }
-        return prob;
+        return prob + Math.log(vertices.size());
     } 
     
     /**
@@ -114,54 +116,29 @@ public class NgramProb implements INgram {
         
     }
     
-    private float prob(String first, String second){
+    private double prob(String first, String second){
         //TODO: fix null pointer exception
         
-        float num = 1;
-        float den = vertices.size();
+        double num = 1;
+        double den = vertices.size();
         
         try{
-            num += (float)vertices.get(first).edges.get(second).getWeight();
+            num += (double)vertices.get(first).edges.get(second).getWeight();
         }catch(NullPointerException ex){
+            //return  (num/den);
             //System.out.println("SECOND" + second + "SECOND");
         }
         
         try{
-            den += (float)vertices.get(first).getCount();
+            den += (double)vertices.get(first).getCount();
            
         }catch(NullPointerException ex){
+            //return  (num/den);
               //          System.out.println("FIRST" + first + "FIRST");
 
         }
-        //System.out.println("Num: " + num + " Den: " + den);
-        /*
-        if(!vertices.containsKey(first)){
-            //first = unk;
-            vertices.get(unk).addCount();
-            
-            //return 0;
-        }
-        
-        
-        if(vertices.get(first).edges.keySet().contains(second)){
-            
-        }else{
-            if(first.equals(unk)){
-                //vertices.get(first).addEdge(second);
-            }else{
-                //second = unk;
-                //vertices.get(first).addEdge(unk);
-            }
-            
-        }*/
-        
-        
-        
-        
-        
-        
-        return num;
-        //return  (num/den);
+       
+        return  (num/den);
     }
     
     private void build(){
@@ -201,7 +178,7 @@ public class NgramProb implements INgram {
         try{
                     
 //vertices.keySet().stream().forEach((t1) -> {
-            System.out.println(vertices.size());
+            //System.out.println(vertices.size());
      
   //      });
         }catch(Exception e){
@@ -219,4 +196,13 @@ public class NgramProb implements INgram {
         
         return output;
     }*/
+    
+    public int getSize(){
+        return this.vertices.size();
+    }
+    
+    
+    public void train(List<String> data){
+        
+    }
 }

@@ -1,7 +1,10 @@
 
 import Classifier.NaiveClassifier;
 import HelperClasses.TokenHelper;
+import LanguageDetection.LangDetector;
+import LanguageModels.NgramProb;
 import Lex.English.Tokenizers.EnglishTokenizer;
+import Lex.Tokenizer.ITokenizer;
 import edu.mit.jwi.Dictionary;
 import edu.mit.jwi.IDictionary;
 import edu.mit.jwi.item.IIndexWord;
@@ -36,7 +39,9 @@ public class Main {
         // 1. Test the ngram probability
         // 2. Use the ngram probability for language detection
         
-        testMinEditDist();
+        testLangDet();
+        //testNgramProb();
+        //testMinEditDist();
         
       
         
@@ -49,16 +54,34 @@ public class Main {
         
     }
     
+    public static void testNgramProb(){
+        ITokenizer tokenizer;
+        tokenizer = new EnglishTokenizer();
+        NgramProb ngram = new NgramProb(2, tokenizer.getTokens("bawo ni omo ", null));
+        System.out.println(ngram.getProb(tokenizer.getTokens("doix", null)));
+        System.out.println(ngram.getProb(tokenizer.getTokens("bawn", null)));
+    }
+    
+    public static void testLangDet(){
+        ITokenizer tokenizer;
+        tokenizer = new EnglishTokenizer();
+        LangDetector a = new LangDetector();
+        a.addLanguage("English", tokenizer.getTokens(" How are you doing today "
+                + " I will not go to school today "
+                + " Where is everyone going today", null));
+        a.addLanguage("Japanese",  tokenizer.getTokens(" watashi no namae wa tanaka desu "
+                + " kyou wa nanimo shinaide kudasai "
+                + " kore ijou wa murii da to omoimasu ", null));
+        System.out.println(a.getLaguage("we are good though"));
+    }
+    
     public static void testMinEditDist(){
         String first = "boy";
         String second = "bot";
         System.out.println(TokenHelper.getMinEditDistence(first, second));
     }
     
-    public static void testNgramProb(){
-        
-    }
-    
+   
     public static void testClassifier() throws FileNotFoundException, IOException{
         EnglishTokenizer a = new EnglishTokenizer();
       

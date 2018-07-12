@@ -4,6 +4,7 @@ package Lex.Tokenizer;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Map;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -31,6 +32,11 @@ public interface ITokenizer {
      * @throws java.io.FileNotFoundException
      */
     public List<String> getTokens(File file) throws FileNotFoundException;
+    
+    public List<String> getTokens(String text, Map<String, String> map);
+
+    public List<String> getTokens(File file, Map<String, String> map) throws FileNotFoundException;
+
 
     
     

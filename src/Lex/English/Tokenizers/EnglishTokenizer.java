@@ -8,8 +8,10 @@ package Lex.English.Tokenizers;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -69,6 +71,37 @@ public class EnglishTokenizer extends EnglishT{
         return temp;
     }
     
+    @Override
+    public List<String> getTokens(String text, Map<String, String> map) {
+        List<String> temp = Collections.synchronizedList(new LinkedList<String>());
+        //final String EOS = " </s> <s> ";
+        String split = "\\s";
+        if(map == null){
+            map = new HashMap();
+            split = "";
+        }
+        String tempText = text;
+            
+            
+        for(String t : map.keySet()){
+            tempText = text.replaceAll(t, map.get(t)).toLowerCase().trim();
+        }
+
+        //TODO: Find </s>
+
+        String[] a  = tempText.split(split);
+        //tokens.add("<s>");
+        for (int i = 0; i < a.length; i++) {
+            if(a[i].length() > 0){
+                temp.add(a[i]);
+            }
+        }
+
+         
+       
+        return temp;
+    }
+    
     
     @Override
     public List<String> getTokens(File file) throws FileNotFoundException{
@@ -121,6 +154,50 @@ public class EnglishTokenizer extends EnglishT{
             return temp;
     }
 
+    
+    @Override
+    public List<String> getTokens(File file, Map<String, String> map) throws FileNotFoundException{
+        
+                    List<String> temp = Collections.synchronizedList(new LinkedList<String>());
+                    String split = "\\s+";
+                    if(map == null){
+                        map = new HashMap();
+            split = "";
+        }
+                    
+      
+        //temp.add("<s>");
+        try (Scanner input = new Scanner(file)) {
+            //temp.add("<s>");
+            String tempString;
+            int count = 0;
+            input.useDelimiter(split);
+            while(input.hasNextLine()){
+                count++;
+                tempString = input.nextLine();
+                
+
+                for(String s : map.keySet()){
+                    tempString = tempString.replaceAll(s, map.get(s)).toLowerCase().trim();
+                }
+                
+                if(tempString.length() > 0){
+                    String[] a  = tempString.split("\\s+");
+                    //temp.add("<s>");
+                    for(int i = 0; i < a.length; i++){
+                        
+                        temp.add(a[i]);
+
+                    }
+                    //temp.add("</s>");
+                }
+
+            }
+        }
+                
+            
+            return temp;
+    }
 
     
 
