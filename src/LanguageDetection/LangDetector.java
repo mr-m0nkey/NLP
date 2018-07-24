@@ -5,6 +5,7 @@
  */
 package LanguageDetection;
 
+import LanguageModels.INgram;
 import LanguageModels.NgramProb;
 import Lex.English.Tokenizers.EnglishTokenizer;
 import Lex.Tokenizer.ITokenizer;
@@ -18,7 +19,7 @@ import java.util.Map;
  */
 public class LangDetector {
     
-    private Map<String, NgramProb> languageModels = new HashMap();
+    private Map<String, INgram> languageModels = new HashMap();
     ITokenizer tokenizer;
 
     public LangDetector(){
@@ -39,8 +40,8 @@ public class LangDetector {
         double biggerProb = -10000;
         List<String> characters = tokenizer.getTokens(text, null);
         for(String lang : languageModels.keySet()){
-            System.out.println(lang + " " + (languageModels.get(lang).getProb(characters) + Math.log((double)languageModels.get(lang).getSize()/total)));
-            double prob = languageModels.get(lang).getProb(characters) + Math.log((double)languageModels.get(lang).getSize()/total);
+            System.out.println(lang + " " + (languageModels.get(lang).getProb(characters, false) + Math.log((double)languageModels.get(lang).getSize()/total)));
+            double prob = languageModels.get(lang).getProb(characters, false) + Math.log((double)languageModels.get(lang).getSize()/total);
             if(prob > biggerProb){
                 language = lang;
                 biggerProb = prob;

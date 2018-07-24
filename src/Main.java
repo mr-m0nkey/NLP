@@ -58,8 +58,8 @@ public class Main {
         ITokenizer tokenizer;
         tokenizer = new EnglishTokenizer();
         NgramProb ngram = new NgramProb(2, tokenizer.getTokens("bawo ni omo ", null));
-        System.out.println(ngram.getProb(tokenizer.getTokens("doix", null)));
-        System.out.println(ngram.getProb(tokenizer.getTokens("bawn", null)));
+        System.out.println(ngram.getProb(tokenizer.getTokens("doix", null), false));
+        System.out.println(ngram.getProb(tokenizer.getTokens("bawn", null), false));
     }
     
     public static void testLangDet(){
@@ -72,7 +72,10 @@ public class Main {
         a.addLanguage("Japanese",  tokenizer.getTokens(" watashi no namae wa tanaka desu "
                 + " kyou wa nanimo shinaide kudasai "
                 + " kore ijou wa murii da to omoimasu ", null));
-        System.out.println(a.getLaguage("we are good though"));
+        a.addLanguage("German",  tokenizer.getTokens(" das ist gut "
+                + " ich abeite nicht hier aber du abeit da "
+                + " sie lient mich ", null));
+        System.out.println(a.getLaguage("ramen wa oishii desu kedo oretachi wa yoku tabenai"));
     }
     
     public static void testMinEditDist(){

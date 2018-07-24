@@ -38,7 +38,7 @@ public class NgramProb implements INgram {
         this.n = n;
         this.tokens = t;
         this.build();
-        //vertices.put(unk, new Vertex(unk));
+        vertices.put(unk, new Vertex(unk));
     }
     
     //public methods
@@ -48,7 +48,8 @@ public class NgramProb implements INgram {
      * @param text
      * @return
      */
-        public double getProb(List<String> text){
+    @Override
+        public double getProb(List<String> text, boolean train){
         double prob = 0;
         for(int i = n - 1; i < text.size(); i++){
             String second = text.get(i);
@@ -66,7 +67,7 @@ public class NgramProb implements INgram {
             
             //System.out.println("First: " + first + " Second: " + second + " Prob: " + prob(first, second));
             //System.out.println(vertices.get(first).edges.size());
-            prob += Math.log(prob(first, second));
+            prob += Math.log(prob(first, second, train));
         }
         return prob + Math.log(vertices.size());
     } 
@@ -116,7 +117,7 @@ public class NgramProb implements INgram {
         
     }
     
-    private double prob(String first, String second){
+    private double prob(String first, String second, boolean train){
         //TODO: fix null pointer exception
         
         double num = 1;
@@ -125,17 +126,14 @@ public class NgramProb implements INgram {
         try{
             num += (double)vertices.get(first).edges.get(second).getWeight();
         }catch(NullPointerException ex){
-            //return  (num/den);
-            //System.out.println("SECOND" + second + "SECOND");
+            //ngram doesn't occur (smooth)
         }
         
         try{
             den += (double)vertices.get(first).getCount();
            
         }catch(NullPointerException ex){
-            //return  (num/den);
-              //          System.out.println("FIRST" + first + "FIRST");
-
+            //handle unknown word
         }
        
         return  (num/den);

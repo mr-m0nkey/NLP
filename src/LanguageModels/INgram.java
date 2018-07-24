@@ -5,10 +5,22 @@
  */
 package LanguageModels;
 
+import java.util.List;
+
 /**
  *
  * @author mayowa
  */
 public interface INgram {
+    
+    public int getSize();
+    
+    /**
+     *
+     * @param text
+     * @param train
+     * @return
+     */
+    public double getProb(List<String> text, boolean train);
     
 }
