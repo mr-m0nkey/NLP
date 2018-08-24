@@ -37,7 +37,7 @@ public class Class {
         no_of_documents += files.length;
         List<String> tokens = Collections.synchronizedList(new LinkedList<String>());
         for (File file : files) {
-            tokens.addAll(tokenizer.getTokens(file));
+            tokens.addAll(tokenizer.getTokens(file).get(0));
             tokens.stream().forEach((token) -> {
                 if(words.containsKey(token)){
                     words.put(token, words.get(token) + 1);
@@ -53,7 +53,7 @@ public class Class {
     void train(String text){
         no_of_documents++;
         List<String> tokens = Collections.synchronizedList(new LinkedList<String>());
-        tokens.addAll(tokenizer.getTokens(text));
+        tokens.addAll(tokenizer.getTokens(text).get(0));
         tokens.stream().forEach((token) -> {
             if(words.containsKey(token)){
                 words.put(token, words.get(token) + 1);
@@ -67,13 +67,13 @@ public class Class {
     
     public double getProb(String text){
         List<String> tokens = Collections.synchronizedList(new LinkedList<String>());
-        tokens.addAll(tokenizer.getTokens(text));
+        tokens.addAll(tokenizer.getTokens(text).get(0));
         return (double)(getProb(tokens) * getPrior());
     }
     
     public double getProb(File file) throws FileNotFoundException{
         List<String> tokens = Collections.synchronizedList(new LinkedList<String>());
-        tokens.addAll(tokenizer.getTokens(file));
+        tokens.addAll(tokenizer.getTokens(file).get(0));
         return (double)(getProb(tokens) + Math.log(getPrior()));
     }
     

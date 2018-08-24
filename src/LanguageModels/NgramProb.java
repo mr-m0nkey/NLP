@@ -6,6 +6,7 @@
 package LanguageModels;
 
 import DataStructures.Vertex;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,6 @@ public class NgramProb implements INgram {
     
     private Map<String, Vertex> vertices = new HashMap();
     final private int n;
-    private List<String> tokens;
     private final String unk = "<UNK>";
     
     /**
@@ -31,13 +31,12 @@ public class NgramProb implements INgram {
      * @param t
      * @throws IllegalArgumentException
      */
-    public NgramProb(int n, List<String> t) throws IllegalArgumentException{
+    public NgramProb(int n, ArrayList<List<String>> t) throws IllegalArgumentException{
         if(n < 2){
             throw new IllegalArgumentException();
         }
         this.n = n;
-        this.tokens = t;
-        this.build();
+        this.train(t);
         vertices.put(unk, new Vertex(unk));
     }
     
@@ -65,11 +64,11 @@ public class NgramProb implements INgram {
             first = first.trim();
             second = second.trim();
             
-            //System.out.println("First: " + first + " Second: " + second + " Prob: " + prob(first, second));
+            //System.out.println("First: " + first + " Second: " + second + " Prob: " + prob(first, second, train));
             //System.out.println(vertices.get(first).edges.size());
             prob += Math.log(prob(first, second, train));
         }
-        return prob + Math.log(vertices.size());
+        return prob;
     } 
     
     /**
@@ -139,40 +138,43 @@ public class NgramProb implements INgram {
         return  (num/den);
     }
     
-    private void build(){
+    private void train(ArrayList<List<String>> listOfSentences){
         
-        
-        for(int i = n - 1; i < tokens.size(); i++){
-            String second = tokens.get(i).toLowerCase();
-            second = second.trim();
-            String first = " ";
-            
-            for(int j = i - (n - 1); j < i; j++){//j = 0
-                //if j >= i - (n - 1)
-                if(j == i - 1){
-                    first += tokens.get(j);
-                }else{
-                    first += tokens.get(j) + " ";
+        for(int l = 0; l < listOfSentences.size(); l++){
+            List<String> sentence = listOfSentences.get(l);
+            for(int i = n - 1; i < sentence.size(); i++){
+                String second = sentence.get(i).toLowerCase();
+                second = second.trim();
+                String first = " ";
+
+                for(int j = i - (n - 1); j < i; j++){//j = 0
+                    //if j >= i - (n - 1)
+                    if(j == i - 1){
+                        first += sentence.get(j);
+                    }else{
+                        first += sentence.get(j) + " ";
+                    }
+
                 }
-                
-            }
-            first = first.trim();
-            if(i >= n -1){
-                
-                if(vertices.containsKey(first)){
-                    vertices.get(first).addCount();
+                first = first.trim();
+                if(i >= n -1){
+
+                    if(vertices.containsKey(first)){
+                        vertices.get(first).addCount();
+                    }else{
+                        vertices.put(first, new Vertex(first));
+
+                    }
+
                 }else{
-                    vertices.put(first, new Vertex(first));
-                    
+
                 }
-               
-            }else{
-                
-            }
-           
-            addVertex(first, second);
+
+                addVertex(first, second);
             
+            }
         }
+        
         try{
                     
 //vertices.keySet().stream().forEach((t1) -> {
@@ -197,10 +199,5 @@ public class NgramProb implements INgram {
     
     public int getSize(){
         return this.vertices.size();
-    }
-    
-    
-    public void train(List<String> data){
-        
     }
 }

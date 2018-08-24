@@ -3,6 +3,7 @@ package Lex.Tokenizer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public interface ITokenizer {
      * @param text
      * @return
      */
-    public List<String> getTokens(String text);
+    public ArrayList<List<String>> getTokens(String text);
     
     /**
      *
@@ -31,11 +32,11 @@ public interface ITokenizer {
      * @return
      * @throws java.io.FileNotFoundException
      */
-    public List<String> getTokens(File file) throws FileNotFoundException;
+    public ArrayList<List<String>> getTokens(File file) throws FileNotFoundException;
     
-    public List<String> getTokens(String text, Map<String, String> map);
+    public ArrayList<List<String>> getTokens(String text, Map<String, String> map);
 
-    public List<String> getTokens(File file, Map<String, String> map) throws FileNotFoundException;
+    public ArrayList<List<String>> getTokens(File file, Map<String, String> map) throws FileNotFoundException;
 
 
     

@@ -5,6 +5,7 @@ import LanguageDetection.LangDetector;
 import LanguageModels.NgramProb;
 import Lex.English.Tokenizers.EnglishTokenizer;
 import Lex.Tokenizer.ITokenizer;
+import POS.PosTagger;
 import edu.mit.jwi.Dictionary;
 import edu.mit.jwi.IDictionary;
 import edu.mit.jwi.item.IIndexWord;
@@ -34,15 +35,16 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // TODO code application logic here
         // 1. Test the ngram probability
         // 2. Use the ngram probability for language detection
         
-        testLangDet();
+        //testLangDet();
         //testNgramProb();
         //testMinEditDist();
-        
+        //testClassifier();
+        //testPos();
       
         
        
@@ -53,13 +55,21 @@ public class Main {
         
         
     }
+
+    public static void testPos(){
+        ITokenizer tokenizer;
+        tokenizer = new EnglishTokenizer();
+        PosTagger tagger = new PosTagger(tokenizer.getTokens("<s> I::pronoun eat::verb meat::object </s> <s> I::subject eat::verb meat::object </s>"));
+        tagger.tag(tokenizer.getTokens("i eat meat").get(0));
+    }
+    
     
     public static void testNgramProb(){
         ITokenizer tokenizer;
         tokenizer = new EnglishTokenizer();
         NgramProb ngram = new NgramProb(2, tokenizer.getTokens("bawo ni omo ", null));
-        System.out.println(ngram.getProb(tokenizer.getTokens("doix", null), false));
-        System.out.println(ngram.getProb(tokenizer.getTokens("bawn", null), false));
+        System.out.println(ngram.getProb(tokenizer.getTokens("doix", null).get(0), false));
+        System.out.println(ngram.getProb(tokenizer.getTokens("bawn", null).get(0), false));
     }
     
     public static void testLangDet(){

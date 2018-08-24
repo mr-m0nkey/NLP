@@ -7,6 +7,7 @@ package Lex.English.Tokenizers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -30,8 +31,9 @@ public class EnglishTokenizer extends EnglishT{
 
     
     @Override
-    public List<String> getTokens(String text) {
+    public ArrayList<List<String>> getTokens(String text) {
         List<String> temp = Collections.synchronizedList(new LinkedList<String>());
+        ArrayList<List<String>> arr = new ArrayList();
         //final String EOS = " </s> <s> ";
         
         String tempText;
@@ -43,6 +45,7 @@ public class EnglishTokenizer extends EnglishT{
                             .replaceAll("shan't", "shall not")
                             .replaceAll("n't", " not")
                             .replaceAll("'ll", " will")
+                            .replaceAll("'s", " 's")
                             .replaceAll("'d", " would")
                             .replace("!", " ! ")
                             .replace("\\s+", " ")
@@ -59,6 +62,11 @@ public class EnglishTokenizer extends EnglishT{
             for (int i = 0; i < a.length; i++) {
                 if(a[i].length() > 0){
                     temp.add(a[i]);
+                    if(a[i].equals("</s>")){
+                        arr.add(temp);
+                        temp = Collections.synchronizedList(new LinkedList<String>());
+                    }
+                    
                 }
             }
 
@@ -67,12 +75,14 @@ public class EnglishTokenizer extends EnglishT{
 
      
         
-        
-        return temp;
+        if(arr.size() < 1){
+                arr.add(temp);
+            }
+        return arr;
     }
     
     @Override
-    public List<String> getTokens(String text, Map<String, String> map) {
+    public ArrayList<List<String>> getTokens(String text, Map<String, String> map) {
         List<String> temp = Collections.synchronizedList(new LinkedList<String>());
         //final String EOS = " </s> <s> ";
         String split = "\\s";
@@ -87,28 +97,34 @@ public class EnglishTokenizer extends EnglishT{
             tempText = text.replaceAll(t, map.get(t)).toLowerCase().trim();
         }
 
-        //TODO: Find </s>
-
+        ArrayList<List<String>> arr = new ArrayList();
         String[] a  = tempText.split(split);
         //tokens.add("<s>");
         for (int i = 0; i < a.length; i++) {
             if(a[i].length() > 0){
                 temp.add(a[i]);
+                if(a[i].equals("</s>")){
+                        arr.add(temp);
+                        temp = Collections.synchronizedList(new LinkedList<String>());
+                    }
             }
         }
 
          
-       
-        return temp;
+       if(arr.size() < 1){
+                arr.add(temp);
+            }
+        return arr;
     }
     
     
     @Override
-    public List<String> getTokens(File file) throws FileNotFoundException{
+    public ArrayList<List<String>> getTokens(File file) throws FileNotFoundException{
         
                     List<String> temp = Collections.synchronizedList(new LinkedList<String>());
                     
-      
+                      ArrayList<List<String>> arr = new ArrayList();
+
         //temp.add("<s>");
         try (Scanner input = new Scanner(file)) {
             //temp.add("<s>");
@@ -140,8 +156,11 @@ public class EnglishTokenizer extends EnglishT{
                     String[] a  = tempString.split("\\s+");
                     //temp.add("<s>");
                     for(int i = 0; i < a.length; i++){
-                        
                         temp.add(a[i]);
+                        if(a[i].equals("</s>")){
+                        arr.add(temp);
+                        temp = Collections.synchronizedList(new LinkedList<String>());
+                    }
 
                     }
                     //temp.add("</s>");
@@ -150,13 +169,15 @@ public class EnglishTokenizer extends EnglishT{
             }
         }
                 
-            
-            return temp;
+            if(arr.size() < 1){
+                arr.add(temp);
+            }
+            return arr;
     }
 
     
     @Override
-    public List<String> getTokens(File file, Map<String, String> map) throws FileNotFoundException{
+    public ArrayList<List<String>> getTokens(File file, Map<String, String> map) throws FileNotFoundException{
         
                     List<String> temp = Collections.synchronizedList(new LinkedList<String>());
                     String split = "\\s+";
@@ -165,7 +186,8 @@ public class EnglishTokenizer extends EnglishT{
             split = "";
         }
                     
-      
+                      ArrayList<List<String>> arr = new ArrayList();
+
         //temp.add("<s>");
         try (Scanner input = new Scanner(file)) {
             //temp.add("<s>");
@@ -185,8 +207,11 @@ public class EnglishTokenizer extends EnglishT{
                     String[] a  = tempString.split("\\s+");
                     //temp.add("<s>");
                     for(int i = 0; i < a.length; i++){
-                        
                         temp.add(a[i]);
+                        if(a[i].equals("</s>")){
+                        arr.add(temp);
+                        temp = Collections.synchronizedList(new LinkedList<String>());
+                    }
 
                     }
                     //temp.add("</s>");
@@ -195,8 +220,10 @@ public class EnglishTokenizer extends EnglishT{
             }
         }
                 
-            
-            return temp;
+            if(arr.size() < 1){
+                arr.add(temp);
+            }
+            return arr;
     }
 
     
