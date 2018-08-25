@@ -17,6 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Scanner;
 
 
 
@@ -44,7 +45,8 @@ public class Main {
         //testNgramProb();
         //testMinEditDist();
         //testClassifier();
-        //testPos();
+        testPos();
+        //testTextPredict();
       
         
        
@@ -72,20 +74,39 @@ public class Main {
         System.out.println(ngram.getProb(tokenizer.getTokens("bawn", null).get(0), false));
     }
     
-    public static void testLangDet(){
+    public static void testTextPredict() throws FileNotFoundException{
+        ITokenizer tokenizer;
+        tokenizer = new EnglishTokenizer();
+        NgramProb ngram = new NgramProb(3, tokenizer.getTokens(new File("C:\\Users\\mayowa\\Docume"
+                + "nts\\NetBeansProjects\\NLP\\Training Data\\Corpus\\english\\test.txt")));
+        ngram.test(tokenizer.getTokens(new File("C:\\Users\\mayowa\\Docume"
+                + "nts\\NetBeansProjects\\NLP\\Training Data\\Corpus\\english\\text.txt")));
+        String text;
+        Scanner get = new Scanner(System.in);
+       while(true){
+            System.out.println("Enter a sttring of words and a word will be suggested");
+            text = get.nextLine();
+            String p = ngram.getNext(tokenizer.getTokens(text).get(0));
+            System.out.println("Predicted word: " + p);
+        }
+    }
+    
+    public static void testLangDet() throws FileNotFoundException{
         ITokenizer tokenizer;
         tokenizer = new EnglishTokenizer();
         LangDetector a = new LangDetector();
-        a.addLanguage("English", tokenizer.getTokens(" How are you doing today "
-                + " I will not go to school today "
-                + " Where is everyone going today", null));
-        a.addLanguage("Japanese",  tokenizer.getTokens(" watashi no namae wa tanaka desu "
-                + " kyou wa nanimo shinaide kudasai "
-                + " kore ijou wa murii da to omoimasu ", null));
-        a.addLanguage("German",  tokenizer.getTokens(" das ist gut "
-                + " ich abeite nicht hier aber du abeit da "
-                + " sie lient mich ", null));
-        System.out.println(a.getLaguage("ramen wa oishii desu kedo oretachi wa yoku tabenai"));
+        Scanner get = new Scanner(System.in);
+        a.addLanguage("English", tokenizer.getTokens(new File("Training Data\\Corpus\\lang detection\\english.txt"), null));
+        a.addLanguage("Japanese",  tokenizer.getTokens(new File("Training Data\\Corpus\\lang detection\\Japanese-romaji.txt"), null));
+        a.addLanguage("German",  tokenizer.getTokens(new File("Training Data\\Corpus\\lang detection\\german.txt"), null));
+        String text;
+        
+        while(true){
+            System.out.println("Write a sentence in either Japanese(romaji), English, or German");
+            text = get.nextLine();
+            System.out.println(a.getLaguage(text));
+        }
+        
     }
     
     public static void testMinEditDist(){
@@ -96,8 +117,7 @@ public class Main {
     
    
     public static void testClassifier() throws FileNotFoundException, IOException{
-        EnglishTokenizer a = new EnglishTokenizer();
-      
+      EnglishTokenizer a = new EnglishTokenizer();  
       NaiveClassifier Reviews = new NaiveClassifier("author"); 
       Reviews.createClass("Positive");
       Reviews.createClass("Negative");

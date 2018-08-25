@@ -77,7 +77,7 @@ public class NgramProb implements INgram {
      * @param n
      * @return
      */
-    public String getNext(List<String> text, int n){
+    public String getNext(List<String> text){
         String t = " ";
         for(int i = text.size() - (this.n - 1); i < text.size(); i++){
             if(i == text.size() - 1){
@@ -86,7 +86,7 @@ public class NgramProb implements INgram {
                 t += text.get(i) + " ";
             }
         }
-        
+        t = t.trim();
         if(!vertices.containsKey(t)){
             t = unk;
         }
@@ -196,6 +196,43 @@ public class NgramProb implements INgram {
         
         return output;
     }*/
+    public void test(ArrayList<List<String>> listOfSentences){
+        for(int l = 0; l < listOfSentences.size(); l++){
+            List<String> sentence = listOfSentences.get(l);
+            for(int i = n - 1; i < sentence.size(); i++){
+                String second = sentence.get(i).toLowerCase();
+                second = second.trim();
+                String first = " ";
+
+                for(int j = i - (n - 1); j < i; j++){//j = 0
+                    //if j >= i - (n - 1)
+                    if(j == i - 1){
+                        first += sentence.get(j);
+                    }else{
+                        first += sentence.get(j) + " ";
+                    }
+
+                }
+                first = first.trim();
+                if(i >= n -1){
+
+                    if(vertices.containsKey(first)){
+                        vertices.get(first).addCount();
+                    }else{
+                        first = unk;
+
+                    }
+
+                }else{
+
+                }
+
+                addVertex(first, second);
+            
+            }
+        }
+    }
+    
     
     public int getSize(){
         return this.vertices.size();
