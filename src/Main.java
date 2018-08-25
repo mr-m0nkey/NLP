@@ -65,8 +65,8 @@ public class Main {
     public static void testPos(){
         ITokenizer tokenizer;
         tokenizer = new EnglishTokenizer();
-        PosTagger tagger = new PosTagger(tokenizer.getTokens("<s> I::pronoun eat::verb meat::object </s> <s> I::subject eat::verb meat::object </s>"));
-        tagger.tag(tokenizer.getTokens("i eat meat").get(0));
+        PosTagger tagger = new PosTagger(tokenizer.getTokens("<s> I::subject eat::verb meat::object </s> <s> meat::subject eat::verb I::object </s>"));
+        tagger.tag(tokenizer.getTokens("meat eat I").get(0));
     }
     
     /**
