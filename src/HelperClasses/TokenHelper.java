@@ -6,9 +6,7 @@
 package HelperClasses;
 
 import Lex.Tokenizer.Token;
-import java.util.Optional;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 /**
  *
@@ -68,9 +66,16 @@ public class TokenHelper {
                     }else if(minimum == up){
                         op = 1;
                     }else{
-                        op = Optional.of(subWeight).orElseGet((Supplier<? extends SubstitutionWeight>) (SubstitutionWeight) (char a, char b) -> {
-                            return 2;
-                        }).getWeight(first.charAt(fir - 1), second.charAt(sec - 1));
+                        if(subWeight == null){
+                            subWeight = new SubstitutionWeight() {
+
+                                @Override
+                                public int getWeight(char a, char b) {
+                                    return 2;
+                                }
+                            };
+                        }
+                        op = subWeight.getWeight(first.charAt(fir - 1), second.charAt(sec - 1));
                     }
                     table[fir][sec] =  + op;
                 }else{

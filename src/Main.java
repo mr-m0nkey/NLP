@@ -129,7 +129,8 @@ public class Main {
     public static void testMinEditDist(){
         String first = "boy";
         String second = "bot";
-        System.out.println(TokenHelper.getMinEditDistence(first, second, (char a, char b) -> 1));
+        int d = TokenHelper.getMinEditDistence(first, second, (char a, char b) -> 1);
+        System.out.println("The mimimum edit distance of " + first + " and " + second + " is " + d);
     }
     
     /**
