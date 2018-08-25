@@ -30,12 +30,25 @@ public interface ITokenizer {
      *
      * @param file
      * @return
-     * @throws java.io.FileNotFoundException
+     * @throws FileNotFoundException
      */
     public ArrayList<List<String>> getTokens(File file) throws FileNotFoundException;
     
+    /**
+     *
+     * @param text
+     * @param map
+     * @return
+     */
     public ArrayList<List<String>> getTokens(String text, Map<String, String> map);
 
+    /**
+     *
+     * @param file
+     * @param map
+     * @return
+     * @throws FileNotFoundException
+     */
     public ArrayList<List<String>> getTokens(File file, Map<String, String> map) throws FileNotFoundException;
 
 

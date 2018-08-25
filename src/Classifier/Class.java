@@ -65,12 +65,23 @@ public class Class {
         });
     }
     
+    /**
+     *
+     * @param text
+     * @return
+     */
     public double getProb(String text){
         List<String> tokens = Collections.synchronizedList(new LinkedList<String>());
         tokens.addAll(tokenizer.getTokens(text).get(0));
         return (double)(getProb(tokens) * getPrior());
     }
     
+    /**
+     *
+     * @param file
+     * @return
+     * @throws FileNotFoundException
+     */
     public double getProb(File file) throws FileNotFoundException{
         List<String> tokens = Collections.synchronizedList(new LinkedList<String>());
         tokens.addAll(tokenizer.getTokens(file).get(0));
@@ -101,8 +112,10 @@ public class Class {
         return (double)no_of_documents/total_no_of_documents;
     }
     
-    
-    
+    /**
+     *
+     * @return
+     */
     public String getName(){
         return this.name;
     }

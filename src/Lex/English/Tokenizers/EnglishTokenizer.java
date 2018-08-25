@@ -21,15 +21,18 @@ import java.util.Scanner;
  */
 public class EnglishTokenizer extends EnglishT{
     
-  
-
-
-  
+    /**
+     *
+     */
     public EnglishTokenizer(){
         
     }
 
-    
+    /**
+     *
+     * @param text
+     * @return
+     */
     @Override
     public ArrayList<List<String>> getTokens(String text) {
         List<String> temp = Collections.synchronizedList(new LinkedList<String>());
@@ -81,6 +84,7 @@ public class EnglishTokenizer extends EnglishT{
         return arr;
     }
     
+
     @Override
     public ArrayList<List<String>> getTokens(String text, Map<String, String> map) {
         List<String> temp = Collections.synchronizedList(new LinkedList<String>());
@@ -117,7 +121,12 @@ public class EnglishTokenizer extends EnglishT{
         return arr;
     }
     
-    
+    /**
+     *
+     * @param file
+     * @return
+     * @throws FileNotFoundException
+     */
     @Override
     public ArrayList<List<String>> getTokens(File file) throws FileNotFoundException{
         
@@ -175,7 +184,13 @@ public class EnglishTokenizer extends EnglishT{
             return arr;
     }
 
-    
+    /**
+     *
+     * @param file
+     * @param map
+     * @return
+     * @throws FileNotFoundException
+     */
     @Override
     public ArrayList<List<String>> getTokens(File file, Map<String, String> map) throws FileNotFoundException{
         

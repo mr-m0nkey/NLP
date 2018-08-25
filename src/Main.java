@@ -35,6 +35,7 @@ public class Main {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
@@ -58,6 +59,9 @@ public class Main {
         
     }
 
+    /**
+     *
+     */
     public static void testPos(){
         ITokenizer tokenizer;
         tokenizer = new EnglishTokenizer();
@@ -65,7 +69,9 @@ public class Main {
         tagger.tag(tokenizer.getTokens("i eat meat").get(0));
     }
     
-    
+    /**
+     *
+     */
     public static void testNgramProb(){
         ITokenizer tokenizer;
         tokenizer = new EnglishTokenizer();
@@ -74,6 +80,10 @@ public class Main {
         System.out.println(ngram.getProb(tokenizer.getTokens("bawn", null).get(0), false));
     }
     
+    /**
+     *
+     * @throws FileNotFoundException
+     */
     public static void testTextPredict() throws FileNotFoundException{
         ITokenizer tokenizer;
         tokenizer = new EnglishTokenizer();
@@ -91,6 +101,10 @@ public class Main {
         }
     }
     
+    /**
+     *
+     * @throws FileNotFoundException
+     */
     public static void testLangDet() throws FileNotFoundException{
         ITokenizer tokenizer;
         tokenizer = new EnglishTokenizer();
@@ -109,13 +123,20 @@ public class Main {
         
     }
     
+    /**
+     *
+     */
     public static void testMinEditDist(){
         String first = "boy";
         String second = "bot";
         System.out.println(TokenHelper.getMinEditDistence(first, second, (char a, char b) -> 1));
     }
     
-   
+    /**
+     *
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public static void testClassifier() throws FileNotFoundException, IOException{
       EnglishTokenizer a = new EnglishTokenizer();  
       NaiveClassifier Reviews = new NaiveClassifier("author"); 
@@ -150,7 +171,10 @@ public class Main {
       System.out.println(correct + " of " + count + " %: " + p);
     }
     
-    
+    /**
+     *
+     * @throws IOException
+     */
     public static void testWordNet() throws IOException{
         //String wnhome = System.getenv("C:\\Program Files (x86)\\WordNet\\2.1\\dict");
         String path = "C:\\Program Files (x86)\\WordNet\\2.1\\dict";

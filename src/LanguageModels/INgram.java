@@ -13,6 +13,10 @@ import java.util.List;
  */
 public interface INgram {
     
+    /**
+     *
+     * @return
+     */
     public int getSize();
     
     /**

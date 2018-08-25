@@ -45,6 +45,7 @@ public class NgramProb implements INgram {
     /**
      *
      * @param text
+     * @param train
      * @return
      */
     @Override
@@ -74,7 +75,6 @@ public class NgramProb implements INgram {
     /**
      *
      * @param text
-     * @param n
      * @return
      */
     public String getNext(List<String> text){
@@ -186,16 +186,10 @@ public class NgramProb implements INgram {
         }
     }
     
-    
-    //overriden methods
-    /*@Override
-    public String toString(){
-        String output = new String();
-        //TODO: Implement
-        
-        
-        return output;
-    }*/
+    /**
+     *
+     * @param listOfSentences
+     */
     public void test(ArrayList<List<String>> listOfSentences){
         for(int l = 0; l < listOfSentences.size(); l++){
             List<String> sentence = listOfSentences.get(l);
@@ -233,7 +227,10 @@ public class NgramProb implements INgram {
         }
     }
     
-    
+    /**
+     *
+     * @return
+     */
     public int getSize(){
         return this.vertices.size();
     }

@@ -23,35 +23,65 @@ public class NaiveClassifier {
     private final ITokenizer tokenizer;
     private int no_of_documents = 0;
     
+    /**
+     *
+     * @param name
+     */
     public NaiveClassifier(String name){
         this.classes = new HashMap();
         this.name = name;
         this.tokenizer = new EnglishTokenizer();
     }
     
+    /**
+     *
+     * @param name
+     * @param tokenizer
+     */
     public NaiveClassifier(String name, ITokenizer tokenizer){
         this.classes = new HashMap();
         this.name = name;
         this.tokenizer = tokenizer;
     }
     
+    /**
+     *
+     * @param name
+     */
     public void createClass(String name){
         classes.put(name, new Class(name, tokenizer));
         
     }
     
+    /**
+     *
+     * @param name
+     * @param files
+     * @throws FileNotFoundException
+     */
     public void trainClass(String name, File[] files) throws FileNotFoundException{
         classes.get(name).train(files);
         no_of_documents += files.length;
         classes.get(name).updateTotal(no_of_documents);
     }
     
+    /**
+     *
+     * @param name
+     * @param text
+     */
     public void trainClass(String name, String text){
         classes.get(name).train(text);
         no_of_documents++;
         classes.get(name).updateTotal(no_of_documents);
     }
     
+    /**
+     *
+     * @param file
+     * @return
+     * @throws FileNotFoundException
+     */
     public String test(File file) throws FileNotFoundException{
         //double prob = 0;
         String highest = "";
@@ -76,6 +106,11 @@ public class NaiveClassifier {
         return highest;
     }
     
+    /**
+     *
+     * @param text
+     * @return
+     */
     public double test(String text){
         double prob = 0;
         for(String cl : classes.keySet()){
@@ -84,10 +119,18 @@ public class NaiveClassifier {
         return prob;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getName(){
         return this.name;
     }
     
+    /**
+     *
+     * @param new_name
+     */
     public void rename(String new_name){
         this.name = new_name;
     }

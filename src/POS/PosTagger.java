@@ -25,13 +25,19 @@ public class PosTagger {
     private Map<String, Map<String, Integer>> emmisionTable;
     private List<String> pos = new ArrayList();
 
-    
+    /**
+     *
+     * @param sentences
+     */
     public PosTagger(ArrayList<List<String>> sentences){
         emmisionTable = new HashMap();
         train(sentences);
     }
 
-    
+    /**
+     *
+     * @param sentences
+     */
     public void train(ArrayList<List<String>> sentences){
         ArrayList<List<String>> posSequence = new ArrayList();
         sentences.forEach((List<String> sentence) -> { 
@@ -69,6 +75,10 @@ public class PosTagger {
         
     }
     
+    /**
+     *
+     * @param sentence
+     */
     public void tag(List<String> sentence){
         List<String> tags = new ArrayList();
         ViterbiEntry[][] viterbiMatrix = new ViterbiEntry[sentence.size()][pos.size() + 1];

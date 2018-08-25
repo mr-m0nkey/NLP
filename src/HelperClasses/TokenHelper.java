@@ -16,11 +16,28 @@ import java.util.function.Supplier;
  */
 public class TokenHelper {
     
+    /**
+     *
+     */
     @FunctionalInterface
     public interface SubstitutionWeight{
+
+        /**
+         *
+         * @param a
+         * @param b
+         * @return
+         */
         int getWeight(char a, char b);
     }
     
+    /**
+     *
+     * @param first
+     * @param second
+     * @param subWeight
+     * @return
+     */
     public static int getMinEditDistence(String first, String second, SubstitutionWeight subWeight){
         first = first.toLowerCase();
         second = second.toLowerCase();
@@ -66,6 +83,13 @@ public class TokenHelper {
         return table[first.length()][second.length()];
     }
     
+    /**
+     *
+     * @param first
+     * @param second
+     * @param subWeight
+     * @return
+     */
     public static int getMinEditDistence(Token first, Token second, SubstitutionWeight subWeight){
         String f = first.toString();
         String s = second.toString();
@@ -84,7 +108,14 @@ public class TokenHelper {
     }
     
     //override to get the probability of substituting a(correct) for b(incorrect)
-    protected static int sub(char a, char b){
+
+    /**
+     *
+     * @param a
+     * @param b
+     * @return
+     */
+        protected static int sub(char a, char b){
         return 2;
     }
 

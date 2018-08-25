@@ -23,15 +23,27 @@ public class LangDetector {
     private Map<String, INgram> languageModels = new HashMap();
     ITokenizer tokenizer;
 
+    /**
+     *
+     */
     public LangDetector(){
         tokenizer = new EnglishTokenizer();
     }
     
+    /**
+     *
+     * @param name
+     * @param text
+     */
     public void addLanguage(String name, ArrayList<List<String>> text){
         languageModels.put(name, new NgramProb(2, text));
     }
     
-    
+    /**
+     *
+     * @param text
+     * @return
+     */
     public String getLaguage(String text){
         int total = 0;
         for(String lang : languageModels.keySet()){
