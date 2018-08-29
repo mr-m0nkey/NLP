@@ -15,10 +15,10 @@ import java.util.Map;
 
 
 /**
- *
+ * Ngram language model
  * @author mayowa
  */
-public class NgramProb implements INgram {
+public class NgramProb implements ILanguageModel {
     
     
     private Map<String, Vertex> vertices = new HashMap();
@@ -27,8 +27,8 @@ public class NgramProb implements INgram {
     
     /**
      *
-     * @param n
-     * @param t
+     * @param n The value of n
+     * @param t An arraylist of training text
      * @throws IllegalArgumentException
      */
     public NgramProb(int n, ArrayList<List<String>> t) throws IllegalArgumentException{
@@ -40,16 +40,14 @@ public class NgramProb implements INgram {
         vertices.put(unk, new Vertex(unk));
     }
     
-    //public methods
 
     /**
-     *
-     * @param text
-     * @param train
-     * @return
+     * Returns the joint probability of a sequence of tokens
+     * @param text A sequence of tokens
+     * @return The logarithmic joint probability of the text
      */
     @Override
-        public double getProb(List<String> text, boolean train){
+        public double getProb(List<String> text){
         double prob = 0;
         for(int i = n - 1; i < text.size(); i++){
             String second = text.get(i);
@@ -67,15 +65,15 @@ public class NgramProb implements INgram {
             
             //System.out.println("First: " + first + " Second: " + second + " Prob: " + prob(first, second, train));
             //System.out.println(vertices.get(first).edges.size());
-            prob += Math.log(prob(first, second, train));
+            prob += Math.log(prob(first, second));
         }
         return prob;
     } 
     
     /**
-     *
-     * @param text
-     * @return
+     * Determines the mostly likely word to occur after a sequence of n words
+     * @param text A sequence of tokens
+     * @return The most likely word to occur
      */
     public String getNext(List<String> text){
         String t = " ";
@@ -109,14 +107,13 @@ public class NgramProb implements INgram {
     }
     
     
-    //private methods
     private void addVertex(String first, String second){
         
         vertices.get(first).addEdge(second);
         
     }
     
-    private double prob(String first, String second, boolean train){
+    private double prob(String first, String second){
         //TODO: fix null pointer exception
         
         double num = 1;
@@ -187,8 +184,8 @@ public class NgramProb implements INgram {
     }
     
     /**
-     *
-     * @param listOfSentences
+     * Runs a test on the n-gram, this helps handle out of vocabulry words, unknown tokens, helps with smoothing, etc.
+     * @param listOfSentences test data
      */
     public void test(ArrayList<List<String>> listOfSentences){
         for(int l = 0; l < listOfSentences.size(); l++){
@@ -228,9 +225,10 @@ public class NgramProb implements INgram {
     }
     
     /**
-     *
-     * @return
+     * Returns the number of tokens in the model
+     * @return token size
      */
+    @Override
     public int getSize(){
         return this.vertices.size();
     }

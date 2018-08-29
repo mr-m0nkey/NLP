@@ -5,7 +5,7 @@
  */
 package LanguageDetection;
 
-import LanguageModels.INgram;
+import LanguageModels.ILanguageModel;
 import LanguageModels.NgramProb;
 import Lex.English.Tokenizers.EnglishTokenizer;
 import Lex.Tokenizer.ITokenizer;
@@ -15,34 +15,38 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * Class for language detection
  * @author mayowa
  */
-public class LangDetector {
+public class LangDetector implements LanguageDetection{
+    //TODO: use internal tokenizers
     
-    private Map<String, INgram> languageModels = new HashMap();
+    private Map<String, ILanguageModel> languageModels = new HashMap();
     ITokenizer tokenizer;
 
     /**
-     *
+     * Default constructor
      */
     public LangDetector(){
         tokenizer = new EnglishTokenizer();
     }
     
     /**
-     *
-     * @param name
-     * @param text
+     * Adds a language to the list of detectable languages
+     * @param name The name of the language
+     * @param text An arraylist of sentences in the language, this can be gotten by passing the language data through a tokenizer
      */
     public void addLanguage(String name, ArrayList<List<String>> text){
         languageModels.put(name, new NgramProb(2, text));
     }
     
+    
+    
+    
     /**
-     *
-     * @param text
-     * @return
+     * Determines the language of an input text
+     * @param text text in unknown language
+     * @return language of input text
      */
     public String getLaguage(String text){
         int total = 0;
@@ -54,7 +58,7 @@ public class LangDetector {
         List<String> characters = tokenizer.getTokens(text, null).get(0);
         for(String lang : languageModels.keySet()){
             //System.out.println(lang + " " + (languageModels.get(lang).getProb(characters, false) + Math.log((double)languageModels.get(lang).getSize()/total)));
-            double prob = languageModels.get(lang).getProb(characters, false) + Math.log((double)languageModels.get(lang).getSize()/total);
+            double prob = languageModels.get(lang).getProb(characters) + Math.log((double)languageModels.get(lang).getSize()/total);
             if(prob > biggerProb){
                 language = lang;
                 biggerProb = prob;

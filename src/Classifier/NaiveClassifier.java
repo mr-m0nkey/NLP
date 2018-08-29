@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * This class represents a naive bayes text classifier, it stores data on the various classes and can determine the class of a new document.
  * @author mayowa
  */
 public class NaiveClassifier {
@@ -24,8 +24,8 @@ public class NaiveClassifier {
     private int no_of_documents = 0;
     
     /**
-     *
-     * @param name
+     * Creates a new classifier object, this constructor uses EnglishTokenizer as the default tokenizer
+     * @param name The name of this classifier, the user may give it any name
      */
     public NaiveClassifier(String name){
         this.classes = new HashMap();
@@ -34,9 +34,9 @@ public class NaiveClassifier {
     }
     
     /**
-     *
-     * @param name
-     * @param tokenizer
+     * Creates a new classifier object
+     * @param name The name of this classifier, the user may give it any name
+     * @param tokenizer The tokenizer to use
      */
     public NaiveClassifier(String name, ITokenizer tokenizer){
         this.classes = new HashMap();
@@ -45,8 +45,8 @@ public class NaiveClassifier {
     }
     
     /**
-     *
-     * @param name
+     * Adds a class to the classifier
+     * @param name The name of the class to add
      */
     public void createClass(String name){
         classes.put(name, new Class(name, tokenizer));
@@ -54,21 +54,22 @@ public class NaiveClassifier {
     }
     
     /**
-     *
-     * @param name
-     * @param files
+     * Adds documents to a class
+     * @param name The name of the class the documents belong to. The class must have been previously added with createClass()
+     * @param files An array of documents to add
      * @throws FileNotFoundException
+     * @throws NullPointerException
      */
-    public void trainClass(String name, File[] files) throws FileNotFoundException{
+    public void trainClass(String name, File[] files) throws FileNotFoundException, NullPointerException{
         classes.get(name).train(files);
         no_of_documents += files.length;
         classes.get(name).updateTotal(no_of_documents);
     }
     
     /**
-     *
-     * @param name
-     * @param text
+     * Adds a string to a class
+     * @param name name The name of the class the documents belong to. The class must have been previously added with createClass()
+     * @param text The string to add
      */
     public void trainClass(String name, String text){
         classes.get(name).train(text);
@@ -77,9 +78,9 @@ public class NaiveClassifier {
     }
     
     /**
-     *
-     * @param file
-     * @return
+     * Determines the class of a file
+     * @param file A file to test
+     * @return The name of the class the file belongs to
      * @throws FileNotFoundException
      */
     public String test(File file) throws FileNotFoundException{
@@ -107,29 +108,29 @@ public class NaiveClassifier {
     }
     
     /**
-     *
-     * @param text
-     * @return
+     * Determines the class of a file
+     * @param text A string to test
+     * @return The name of the class the file belongs to
      */
     public double test(String text){
         double prob = 0;
-        for(String cl : classes.keySet()){
+        classes.keySet().stream().forEach((cl) -> {
             System.out.println(cl + ": " + classes.get(cl).getProb(text));
-        }
+        });
         return prob;
     }
     
     /**
-     *
-     * @return
+     * Returns the name of the classifier
+     * @return The name of the classifier
      */
     public String getName(){
         return this.name;
     }
     
     /**
-     *
-     * @param new_name
+     * Renames the classifier
+     * @param new_name The new name of the classifier
      */
     public void rename(String new_name){
         this.name = new_name;

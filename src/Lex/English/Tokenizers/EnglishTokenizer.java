@@ -16,22 +16,15 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- *
+ * Default English Tokenizer
  * @author mayowa
  */
 public class EnglishTokenizer extends EnglishT{
     
     /**
-     *
-     */
-    public EnglishTokenizer(){
-        
-    }
-
-    /**
-     *
-     * @param text
-     * @return
+     * Extracts the tokens from a text
+     * @param text Text to tokenize
+     * @return Text tokens. Each element of the arraylist contains a group of tokens (this may represent sentences, etc. Each list then contains it's extracted tokens) 
      */
     @Override
     public ArrayList<List<String>> getTokens(String text) {
@@ -84,7 +77,6 @@ public class EnglishTokenizer extends EnglishT{
         return arr;
     }
     
-
     @Override
     public ArrayList<List<String>> getTokens(String text, Map<String, String> map) {
         List<String> temp = Collections.synchronizedList(new LinkedList<String>());
@@ -123,8 +115,8 @@ public class EnglishTokenizer extends EnglishT{
     
     /**
      *
-     * @param file
-     * @return
+     * @param file A file of text to be tokenized
+     * @return Text tokens. Each element of the arraylist contains a group of tokens (this may represent sentences, etc. Each list then contains it's extracted tokens) 
      * @throws FileNotFoundException
      */
     @Override
@@ -186,9 +178,12 @@ public class EnglishTokenizer extends EnglishT{
 
     /**
      *
-     * @param file
-     * @param map
-     * @return
+     * @param file A file of text to be tokenized
+     * @param map This map is used to pass in substrings that should be substituted. 
+     * If the keys are found as substrings in the input file, they are replaced with their values before tokenization takes place. 
+     * For example, <b>they'll</b> can be substituted to <b>they will</b>.<br>
+     * If null is passed, it performs character tokenization.
+     * @return Text tokens. Each element of the arraylist contains a group of tokens (this may represent sentences, etc. Each list then contains it's extracted tokens) 
      * @throws FileNotFoundException
      */
     @Override

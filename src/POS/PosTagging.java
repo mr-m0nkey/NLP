@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Lex.English.Tokenizers;
-
-import Lex.Tokenizer.ITokenizer;
+package POS;
 
 /**
- * Abstract class all English tokenizers implement
+ * Interface all Part of Speech Taggers will implement
  * @author mayowa
  */
-public abstract class EnglishT implements ITokenizer{   
+public interface PosTagging {
     
 }

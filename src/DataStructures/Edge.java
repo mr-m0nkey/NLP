@@ -6,7 +6,7 @@
 package DataStructures;
 
 /**
- *
+ * Represents a graph edge
  * @author mayowa
  */
 public class Edge {
@@ -26,8 +26,8 @@ public class Edge {
     }
     
     /**
-     *
-     * @return
+     * Returns the weight of the edge as an integer
+     * @return The weight of the edge
      */
     public int getWeight(){
         return count;

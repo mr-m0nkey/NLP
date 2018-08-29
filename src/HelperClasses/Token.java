@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Lex.Tokenizer;
+package HelperClasses;
 
 /**
  *
@@ -18,10 +18,22 @@ public class Token {
     
     /**
      *
+     */
+    private final String lemma = "";
+    
+    /**
+     *
+     */
+    private final String stem = "";
+    
+    /**
+     *
      * @param word
      */
     public Token(String word){
         word_form = word;
+        
+        
     }
     
     @Override

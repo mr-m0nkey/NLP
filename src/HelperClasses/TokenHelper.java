@@ -5,35 +5,32 @@
  */
 package HelperClasses;
 
-import Lex.Tokenizer.Token;
-import java.util.function.Consumer;
-
 /**
- *
+ * Perform minor tasks on strings. A utility class
  * @author mayowa
  */
 public class TokenHelper {
     
     /**
-     *
+     * A functional interface representing a lambda that should be run to determine the substitution value of two characters when calculating minimum edit distance
      */
     @FunctionalInterface
     public interface SubstitutionWeight{
 
         /**
-         *
-         * @param a
-         * @param b
-         * @return
+         * determines the cost of substituting a character for another. 
+         * @param a The initial character
+         * @param b The new character
+         * @return The cost of substitution
          */
         int getWeight(char a, char b);
     }
     
     /**
-     *
-     * @param first
-     * @param second
-     * @param subWeight
+     * Calculates the minium edit distance of two strings
+     * @param first The first string
+     * @param second The second string
+     * @param subWeight A lambda to handle substitution weights, it can be set to null
      * @return
      */
     public static int getMinEditDistence(String first, String second, SubstitutionWeight subWeight){
@@ -67,13 +64,7 @@ public class TokenHelper {
                         op = 1;
                     }else{
                         if(subWeight == null){
-                            subWeight = new SubstitutionWeight() {
-
-                                @Override
-                                public int getWeight(char a, char b) {
-                                    return 2;
-                                }
-                            };
+                            subWeight = (char a, char b) -> 2;
                         }
                         op = subWeight.getWeight(first.charAt(fir - 1), second.charAt(sec - 1));
                     }
@@ -87,20 +78,7 @@ public class TokenHelper {
         }
         return table[first.length()][second.length()];
     }
-    
-    /**
-     *
-     * @param first
-     * @param second
-     * @param subWeight
-     * @return
-     */
-    public static int getMinEditDistence(Token first, Token second, SubstitutionWeight subWeight){
-        String f = first.toString();
-        String s = second.toString();
-        return getMinEditDistence(f, s, subWeight);
-    }
-    
+        
     private static int min(int a, int b, int c){
         int smallest = b;
         if(a < b){
@@ -112,26 +90,4 @@ public class TokenHelper {
         return smallest;
     }
     
-    //override to get the probability of substituting a(correct) for b(incorrect)
-
-    /**
-     *
-     * @param a
-     * @param b
-     * @return
-     */
-        protected static int sub(char a, char b){
-        return 2;
-    }
-
-    private static class ConsumerImpl implements Consumer<SubstitutionWeight> {
-
-        public ConsumerImpl() {
-        }
-
-        @Override
-        public void accept(SubstitutionWeight t) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-    }
 }

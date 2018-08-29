@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * Represents a graph vertex
  * @author mayowa
  */
 public class Vertex {
@@ -18,8 +18,8 @@ public class Vertex {
     private int count = 1;
     
     /**
-     *
-     * @param t
+     * Creates a vertex object
+     * @param t The token to be stored in the vertex
      */
     public Vertex(String t){
         this.token = t;
@@ -29,13 +29,13 @@ public class Vertex {
     }
     
     /**
-     *
+     *The edges linked to the vertex
      */
     public Map<String, Edge> edges = new HashMap();
     
     /**
-     *
-     * @param s
+     * Connects the vertex to another vertex. If the other vertex doesn't exist, a new vertex is creates 
+     * @param s The string stored in the vertex at the other end of the edge
      */
     public void addEdge(String s){
         if(edges.containsKey(s)){
@@ -46,15 +46,15 @@ public class Vertex {
     }
     
     /**
-     *
+     * Increases the value of the vertex by 1
      */
     public void addCount(){
         count++;
     }
     
     /**
-     *
-     * @return
+     * Returns the value of the vertex
+     * @return The value of the vertex
      */
     public int getCount(){
         return count;

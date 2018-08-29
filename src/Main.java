@@ -1,6 +1,5 @@
 
 import Classifier.NaiveClassifier;
-import HelperClasses.TokenHelper;
 import LanguageDetection.LangDetector;
 import LanguageModels.NgramProb;
 import Lex.English.Tokenizers.EnglishTokenizer;
@@ -17,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -46,7 +46,7 @@ public class Main {
         //testNgramProb();
         //testMinEditDist();
         //testClassifier();
-        testPos();
+        //testPos();
         //testTextPredict();
       
         
@@ -65,8 +65,9 @@ public class Main {
     public static void testPos(){
         ITokenizer tokenizer;
         tokenizer = new EnglishTokenizer();
-        PosTagger tagger = new PosTagger(tokenizer.getTokens("<s> I::subject eat::verb meat::object </s> <s> meat::subject eat::verb I::object </s>"));
-        tagger.tag(tokenizer.getTokens("meat eat I").get(0));
+        PosTagger tagger = new PosTagger(tokenizer.getTokens("<s> I::pronoun am::verb a::determiner boy::noun </s>"));
+        List<String> tags = tagger.tag(tokenizer.getTokens("I am a boy").get(0));
+        System.out.println(tags);
     }
     
     /**
@@ -76,8 +77,8 @@ public class Main {
         ITokenizer tokenizer;
         tokenizer = new EnglishTokenizer();
         NgramProb ngram = new NgramProb(2, tokenizer.getTokens("bawo ni omo ", null));
-        System.out.println(ngram.getProb(tokenizer.getTokens("doix", null).get(0), false));
-        System.out.println(ngram.getProb(tokenizer.getTokens("bawn", null).get(0), false));
+        System.out.println(ngram.getProb(tokenizer.getTokens("doix", null).get(0)));
+        System.out.println(ngram.getProb(tokenizer.getTokens("bawn", null).get(0)));
     }
     
     /**
@@ -123,15 +124,6 @@ public class Main {
         
     }
     
-    /**
-     *
-     */
-    public static void testMinEditDist(){
-        String first = "boy";
-        String second = "bot";
-        int d = TokenHelper.getMinEditDistence(first, second, (char a, char b) -> 1);
-        System.out.println("The mimimum edit distance of " + first + " and " + second + " is " + d);
-    }
     
     /**
      *

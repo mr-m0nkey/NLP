@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * This class represents a group of documents for classification, documents in the same class have similar content
  * @author mayowa
  */
 public class Class {
@@ -27,13 +27,23 @@ public class Class {
     int no_of_words = 0;
     private final Map<String, Integer> words;
     
-    Class(String name, ITokenizer tokenizer){
+    /**
+     * Creates a class of documents
+     * @param name The name of this class
+     * @param tokenizer A tokenizer object
+     */
+    public Class(String name, ITokenizer tokenizer){
         this.words = new HashMap();
         this.name = name;
         this.tokenizer = tokenizer;
     }
     
-    void train(File[] files) throws FileNotFoundException{
+    /**
+     * This method accepts an array of files and trains the class with the files given. It is used to store necessary features received from the documents
+     * @param files An array of documents that belong to this class
+     * @throws FileNotFoundException
+     */
+    public void train(File[] files) throws FileNotFoundException{
         no_of_documents += files.length;
         List<String> tokens = Collections.synchronizedList(new LinkedList<String>());
         for (File file : files) {
@@ -50,7 +60,11 @@ public class Class {
         }
     }
     
-    void train(String text){
+    /**
+     * This method accepts an array of files and trains the class with the string given. It is used to store necessary features received from the documents
+     * @param text A string belonging to a particular class
+     */
+    public void train(String text){
         no_of_documents++;
         List<String> tokens = Collections.synchronizedList(new LinkedList<String>());
         tokens.addAll(tokenizer.getTokens(text).get(0));
@@ -66,9 +80,9 @@ public class Class {
     }
     
     /**
-     *
-     * @param text
-     * @return
+     * Gets the probability of a string belonging to this class
+     * @param text The string to test
+     * @return The logarithmic probability of the string belonging to the class
      */
     public double getProb(String text){
         List<String> tokens = Collections.synchronizedList(new LinkedList<String>());
@@ -77,9 +91,9 @@ public class Class {
     }
     
     /**
-     *
-     * @param file
-     * @return
+     * Gets the probability of a file belonging to this class
+     * @param file The file to test
+     * @return The logarithmic probability of the file belonging to the class
      * @throws FileNotFoundException
      */
     public double getProb(File file) throws FileNotFoundException{
@@ -114,7 +128,7 @@ public class Class {
     
     /**
      *
-     * @return
+     * @return Returns the name given to this class
      */
     public String getName(){
         return this.name;

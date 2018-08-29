@@ -11,12 +11,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 /**
- *
+ * Part of speech tagger using the Viterbi algorithm
  * @author mayowa
  */
-public class PosTagger {
+public class PosTagger implements PosTagging{
     
     //transition probabilities
     private NgramProb transitionProb;
@@ -26,19 +27,16 @@ public class PosTagger {
     private List<String> pos = new ArrayList();
 
     /**
-     *
-     * @param sentences
+     * Initializes the tagger
+     * @param sentences Training data. Tokens must be of the form <b>word::tag</b> except start and stop tokens
      */
     public PosTagger(ArrayList<List<String>> sentences){
         emmisionTable = new HashMap();
         train(sentences);
     }
 
-    /**
-     *
-     * @param sentences
-     */
-    public void train(ArrayList<List<String>> sentences){
+    
+    private void train(ArrayList<List<String>> sentences){
         ArrayList<List<String>> posSequence = new ArrayList();
         sentences.forEach((List<String> sentence) -> { 
             List<String> tagSequence = new ArrayList();
@@ -76,10 +74,11 @@ public class PosTagger {
     }
     
     /**
-     *
-     * @param sentence
+     * Determines the parts of speech of each token in the array
+     * @param sentence A sequence of tokens
+     * @return A sequence of part of speech tags
      */
-    public void tag(List<String> sentence){
+    public List<String> tag(List<String> sentence){
         List<String> tags = new ArrayList();
         ViterbiEntry[][] viterbiMatrix = new ViterbiEntry[sentence.size()][pos.size()];
         
@@ -97,7 +96,7 @@ public class PosTagger {
                         List<String> list = new ArrayList();
                         list.add("<s>");
                         list.add(pos.get(y));
-                        double transition = transitionProb.getProb(list, true);
+                        double transition = transitionProb.getProb(list);
                         double data = transition + emmision;
                         ViterbiEntry entry = new ViterbiEntry();
                         entry.addProb(data, -1);
@@ -110,15 +109,14 @@ public class PosTagger {
                                 List<String> list = new ArrayList();
                                 list.add(pos.get(i));
                                 list.add("</s>");
-                                double transition = transitionProb.getProb(list, true);
+                                double transition = transitionProb.getProb(list);
                                 double data = transition;
                                 data += viterbiMatrix[x - 1][i].max;
                                 entry.addProb(data, i);
                             }
                         }
                         
-                        getSequence(sentence, viterbiMatrix, entry, x);
-                        break;
+                        return getSequence(sentence, viterbiMatrix, entry, x);
                     }else{
                         word = sentence.get(x);
                         int wordistag = wordIsTagCount(word, pos.get(y)) + 1;
@@ -130,7 +128,7 @@ public class PosTagger {
                                 List<String> list = new ArrayList();
                                 list.add(pos.get(i));
                                 list.add(pos.get(y));
-                                double transition = transitionProb.getProb(list, true);
+                                double transition = transitionProb.getProb(list);
                                 double data = transition + emmision;
                                 data += viterbiMatrix[x - 1][i].max;
                                 entry.addProb(data, i);
@@ -145,7 +143,7 @@ public class PosTagger {
             }
             
         }
-       
+       return null;
     }
 
     private int wordIsTagCount(String word, String tag){
@@ -157,27 +155,36 @@ public class PosTagger {
     }
     
     private int wordOccuredCount(String word){
-        int n = 0;
-        Iterator<String> iterator = emmisionTable.get(word).keySet().iterator();
-        while(iterator.hasNext()){
-            String tag = iterator.next();
-            n += emmisionTable.get(word).get(tag);
+        int n = emmisionTable.size();
+        try{
+            Iterator<String> iterator = emmisionTable.get(word).keySet().iterator();
+            while(iterator.hasNext()){
+                String tag = iterator.next();
+                n += emmisionTable.get(word).get(tag);
+            }
+        }catch(NullPointerException ex){
+            
         }
+        
         return n;
     }
     
-    private void getSequence(List<String> sentence, ViterbiEntry[][] viterbiMatrix, ViterbiEntry entry, int x){
-        
+    private List<String> getSequence(List<String> sentence, ViterbiEntry[][] viterbiMatrix, ViterbiEntry entry, int x){
+        List<String> sequence = new ArrayList();
+        Stack<String> stack = new Stack();
         while(true){
             if(entry.maxY == -1){
                 break;
             }else{
-                System.out.println(pos.get(entry.maxY));
+                stack.push(pos.get(entry.maxY));
                 x -= 1;
                 entry = viterbiMatrix[x][entry.maxY];
             }
-            
         }
+        while(!stack.isEmpty()){
+            sequence.add(stack.pop());
+        }
+        return sequence;
     }
     
     
@@ -192,13 +199,15 @@ public class PosTagger {
         
         public void addProb(double dat, int y){
             data.add(new Data(dat, y));
-            for(Data d : data){
-                if(d.data > max){
-                    max = d.data;
-                    d.y = y;
-                    maxY = y;
-                }
-            }
+            data.stream().filter((d) -> (d.data > max)).map((d) -> {
+                max = d.data;
+                return d;
+            }).map((d) -> {
+                d.y = y;
+                return d;
+            }).forEach((_item) -> {
+                maxY = y;
+            });
         }
         
   
