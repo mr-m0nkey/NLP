@@ -30,7 +30,7 @@ public class TokenHelper {
      * Calculates the minium edit distance of two strings
      * @param first The first string
      * @param second The second string
-     * @param subWeight A lambda to handle substitution weights, it can be set to null
+     * @param subWeight A lambda to handle substitution weights, it can be set to null to give a default substitution cost of 1
      * @return
      */
     public static int getMinEditDistence(String first, String second, SubstitutionWeight subWeight){
@@ -59,16 +59,17 @@ public class TokenHelper {
                     int minimum = min(left, leftUp, up);
                     int op;
                     if(minimum == left){
-                        op = 1;
+                        op = 1 + left;
                     }else if(minimum == up){
-                        op = 1;
+                        op = 1 + up;
                     }else{
                         if(subWeight == null){
                             subWeight = (char a, char b) -> 2;
                         }
-                        op = subWeight.getWeight(first.charAt(fir - 1), second.charAt(sec - 1));
+                        op = leftUp + subWeight.getWeight(first.charAt(fir - 1), second.charAt(sec - 1));
                     }
-                    table[fir][sec] =  + op;
+                    table[fir][sec] = op;
+                    
                 }else{
                     int leftUp = table[fir - 1][sec - 1];
                     table[fir][sec] = leftUp;
