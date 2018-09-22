@@ -1,4 +1,2 @@
 # NLP
-Mini NLP project with implementations for various algorithms
-
-Just doing whatever tbh
+Java Library for basic NLP tasks
