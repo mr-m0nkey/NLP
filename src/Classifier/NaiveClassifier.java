@@ -9,6 +9,7 @@ import Lex.English.Tokenizers.EnglishTokenizer;
 import Lex.Tokenizer.ITokenizer;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,12 +17,13 @@ import java.util.Map;
  * This class represents a naive bayes text classifier, it stores data on the various classes and can determine the class of a new document.
  * @author mayowa
  */
-public class NaiveClassifier {
+public class NaiveClassifier implements Serializable{
     
     private final Map<String, Class> classes;
     private String name;
     private final ITokenizer tokenizer;
     private int no_of_documents = 0;
+    private String path;
     
     /**
      * Creates a new classifier object, this constructor uses EnglishTokenizer as the default tokenizer
@@ -103,7 +105,6 @@ public class NaiveClassifier {
                 
             }
         }
-        System.out.println(highest);
         return highest;
     }
     
@@ -112,12 +113,27 @@ public class NaiveClassifier {
      * @param text A string to test
      * @return The name of the class the file belongs to
      */
-    public double test(String text){
-        double prob = 0;
-        classes.keySet().stream().forEach((cl) -> {
-            System.out.println(cl + ": " + classes.get(cl).getProb(text));
-        });
-        return prob;
+    public String test(String text){
+        //double prob = 0;
+        String highest = "";
+        double p = 0;
+        int count = 0;
+        for(String cl : classes.keySet()){
+            if(count == 0){
+                count++;
+                p = classes.get(cl).getProb(text);
+                highest = cl;
+            }
+            if(classes.get(cl).getProb(text) > p){
+                p = classes.get(cl).getProb(text);
+                highest = cl;
+            }else if(classes.get(cl).getProb(text) < p){
+                
+            }else{
+                
+            }
+        }
+        return highest;
     }
     
     /**
@@ -136,6 +152,9 @@ public class NaiveClassifier {
         this.name = new_name;
     }
     
+    public void setPath(String path){
+        this.path = path;
+    }
     
     
 }

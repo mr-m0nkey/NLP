@@ -6,6 +6,7 @@
 package LanguageModels;
 
 import DataStructures.Vertex;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.Map;
  * Ngram language model
  * @author mayowa
  */
-public class NgramProb implements ILanguageModel {
+public class NgramProb implements ILanguageModel , Serializable{
     
     
     private Map<String, Vertex> vertices = new HashMap();

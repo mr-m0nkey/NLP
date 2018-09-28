@@ -6,6 +6,7 @@
 package POS;
 
 import LanguageModels.NgramProb;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,7 +18,7 @@ import java.util.Stack;
  * Part of speech tagger using the Viterbi algorithm
  * @author mayowa
  */
-public class PosTagger implements PosTagging{
+public class PosTagger implements PosTagging, Serializable{
     
     //transition probabilities
     private NgramProb transitionProb;

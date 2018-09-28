@@ -7,6 +7,7 @@ package Lex.English.Tokenizers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ import java.util.Scanner;
  * Default English Tokenizer
  * @author mayowa
  */
-public class EnglishTokenizer extends EnglishT{
+public class EnglishTokenizer extends EnglishT implements Serializable{
     
     /**
      * Extracts the tokens from a text
@@ -67,10 +68,6 @@ public class EnglishTokenizer extends EnglishT{
             }
 
          
-          
-
-     
-        
         if(arr.size() < 1){
                 arr.add(temp);
             }

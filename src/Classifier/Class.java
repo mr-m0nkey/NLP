@@ -8,6 +8,7 @@ package Classifier;
 import Lex.Tokenizer.ITokenizer;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -18,7 +19,7 @@ import java.util.Map;
  * This class represents a group of documents for classification, documents in the same class have similar content
  * @author mayowa
  */
-public class Class {
+public class Class implements Serializable{
     
     String name;
     int no_of_documents = 0;
@@ -87,7 +88,7 @@ public class Class {
     public double getProb(String text){
         List<String> tokens = Collections.synchronizedList(new LinkedList<String>());
         tokens.addAll(tokenizer.getTokens(text).get(0));
-        return (double)(getProb(tokens) * getPrior());
+        return (double)(getProb(tokens) + Math.log(getPrior()));
     }
     
     /**

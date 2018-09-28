@@ -1,67 +1,64 @@
-
-import Classifier.NaiveClassifier;
-import LanguageDetection.LangDetector;
-import LanguageModels.NgramProb;
-import Lex.English.Tokenizers.EnglishTokenizer;
-import Lex.Tokenizer.ITokenizer;
-import POS.PosTagger;
-import edu.mit.jwi.Dictionary;
-import edu.mit.jwi.IDictionary;
-import edu.mit.jwi.item.IIndexWord;
-import edu.mit.jwi.item.IWord;
-import edu.mit.jwi.item.IWordID;
-import edu.mit.jwi.item.POS;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.List;
-import java.util.Scanner;
-
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import Classifier.NaiveClassifier;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 /**
  *
  * @author mayowa
  */
-public class Main {
-
-    /**
-     * @param args the command line arguments
-     * @throws java.io.IOException
-     */
-    public static void main(String[] args) throws IOException {
-        // TODO code application logic here
-        // 1. Test the ngram probability
-        // 2. Use the ngram probability for language detection
-        
-        //testLangDet();
-        //testNgramProb();
-        //testMinEditDist();
-        //testClassifier();
-        //testPos();
-        //testTextPredict();
-      
-        
-       
-        
-        
-        
-        
-        
-        
+public class NewEmptyJUnitTest {
+    
+    public NewEmptyJUnitTest() {
+    }
+    
+    @BeforeClass
+    public static void setUpClass() {
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    }
+    
+    @Before
+    public void setUp() {
+    }
+    
+    @After
+    public void tearDown() {
     }
 
-    /**
-     *
-     */
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+    // @Test
+    // public void hello() {}
+    @Test
+    public void testPos() throws IOException, ClassNotFoundException{
+        NaiveClassifier naive = new NaiveClassifier("General");
+        ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("object.dat"));
+        output.writeObject(naive);
+        ObjectInputStream input = new ObjectInputStream(new FileInputStream("object.dat"));
+
+        NaiveClassifier a = (NaiveClassifier)input.readObject();
+        System.out.println(a.getName());
+        
+    }
+    
+    /*
     public static void testPos(){
         ITokenizer tokenizer;
         tokenizer = new EnglishTokenizer();
@@ -70,9 +67,6 @@ public class Main {
         System.out.println(tags);
     }
     
-    /**
-     *
-     */
     public static void testNgramProb(){
         ITokenizer tokenizer;
         tokenizer = new EnglishTokenizer();
@@ -81,10 +75,6 @@ public class Main {
         System.out.println(ngram.getProb(tokenizer.getTokens("bawn", null).get(0)));
     }
     
-    /**
-     *
-     * @throws FileNotFoundException
-     */
     public static void testTextPredict() throws FileNotFoundException{
         ITokenizer tokenizer;
         tokenizer = new EnglishTokenizer();
@@ -102,10 +92,7 @@ public class Main {
         }
     }
     
-    /**
-     *
-     * @throws FileNotFoundException
-     */
+   
     public static void testLangDet() throws FileNotFoundException{
         ITokenizer tokenizer;
         tokenizer = new EnglishTokenizer();
@@ -124,50 +111,7 @@ public class Main {
         
     }
     
-    
-    /**
-     *
-     * @throws FileNotFoundException
-     * @throws IOException
-     */
-    public static void testClassifier() throws FileNotFoundException, IOException{
-      EnglishTokenizer a = new EnglishTokenizer();  
-      NaiveClassifier Reviews = new NaiveClassifier("author"); 
-      Reviews.createClass("Positive");
-      Reviews.createClass("Negative");
-      File[] positive = new File("Training Data\\Corpus\\english\\movie reviews\\pos").listFiles();
-      Reviews.trainClass("Positive", positive);
-      File[] negative = new File("Training Data\\Corpus\\english\\movie reviews\\neg").listFiles();
-      Reviews.trainClass("Negative", negative);
-      
-      File[] positive_test = new File("Training Data\\Corpus\\english\\movie reviews\\positive test").listFiles();
-      File[] negative_test = new File("Training Data\\Corpus\\english\\movie reviews\\negative test").listFiles();
-      
-      System.out.println("positive");
-      double count = 0;
-      double correct = 0;
-      for(int i = 0; i < positive_test.length; i++){
-          if(Reviews.test(positive_test[i]).equals("Positive")){
-              correct += 1;
-          }
-          count++;
-      }
-      
-      System.out.println("Negative");
-      for(int i = 0; i < negative_test.length; i++){
-          if(Reviews.test(negative_test[i]).equals("Negative")){
-              correct += 1;
-          }
-          count++;
-      }
-      double p = (double)((correct/count) * 100);
-      System.out.println(correct + " of " + count + " %: " + p);
-    }
-    
-    /**
-     *
-     * @throws IOException
-     */
+
     public static void testWordNet() throws IOException{
         //String wnhome = System.getenv("C:\\Program Files (x86)\\WordNet\\2.1\\dict");
         String path = "C:\\Program Files (x86)\\WordNet\\2.1\\dict";
@@ -189,6 +133,7 @@ public class Main {
         System.out.println("Gloss = " + word.getSynset().getGloss());
         }
     
-
     
+    
+    */
 }

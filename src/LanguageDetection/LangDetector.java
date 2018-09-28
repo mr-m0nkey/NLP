@@ -9,6 +9,7 @@ import LanguageModels.ILanguageModel;
 import LanguageModels.NgramProb;
 import Lex.English.Tokenizers.EnglishTokenizer;
 import Lex.Tokenizer.ITokenizer;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.Map;
  * Class for language detection
  * @author mayowa
  */
-public class LangDetector implements LanguageDetection{
+public class LangDetector implements LanguageDetection, Serializable{
     //TODO: use internal tokenizers
     
     private Map<String, ILanguageModel> languageModels = new HashMap();
