@@ -4,17 +4,10 @@
  * and open the template in the editor.
  */
 
-import Classifier.NaiveClassifier;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
 /**
  *
@@ -46,18 +39,7 @@ public class NewEmptyJUnitTest {
     //
     // @Test
     // public void hello() {}
-    @Test
-    public void testPos() throws IOException, ClassNotFoundException{
-        NaiveClassifier naive = new NaiveClassifier("General");
-        ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("object.dat"));
-        output.writeObject(naive);
-        ObjectInputStream input = new ObjectInputStream(new FileInputStream("object.dat"));
-
-        NaiveClassifier a = (NaiveClassifier)input.readObject();
-        System.out.println(a.getName());
-        
-    }
-    
+   
     /*
     public static void testPos(){
         ITokenizer tokenizer;
@@ -74,43 +56,7 @@ public class NewEmptyJUnitTest {
         System.out.println(ngram.getProb(tokenizer.getTokens("doix", null).get(0)));
         System.out.println(ngram.getProb(tokenizer.getTokens("bawn", null).get(0)));
     }
-    
-    public static void testTextPredict() throws FileNotFoundException{
-        ITokenizer tokenizer;
-        tokenizer = new EnglishTokenizer();
-        NgramProb ngram = new NgramProb(3, tokenizer.getTokens(new File("C:\\Users\\mayowa\\Docume"
-                + "nts\\NetBeansProjects\\NLP\\Training Data\\Corpus\\english\\test.txt")));
-        ngram.test(tokenizer.getTokens(new File("C:\\Users\\mayowa\\Docume"
-                + "nts\\NetBeansProjects\\NLP\\Training Data\\Corpus\\english\\text.txt")));
-        String text;
-        Scanner get = new Scanner(System.in);
-       while(true){
-            System.out.println("Enter a sttring of words and a word will be suggested");
-            text = get.nextLine();
-            String p = ngram.getNext(tokenizer.getTokens(text).get(0));
-            System.out.println("Predicted word: " + p);
-        }
-    }
-    
-   
-    public static void testLangDet() throws FileNotFoundException{
-        ITokenizer tokenizer;
-        tokenizer = new EnglishTokenizer();
-        LangDetector a = new LangDetector();
-        Scanner get = new Scanner(System.in);
-        a.addLanguage("English", tokenizer.getTokens(new File("Training Data\\Corpus\\lang detection\\english.txt"), null));
-        a.addLanguage("Japanese",  tokenizer.getTokens(new File("Training Data\\Corpus\\lang detection\\Japanese-romaji.txt"), null));
-        a.addLanguage("German",  tokenizer.getTokens(new File("Training Data\\Corpus\\lang detection\\german.txt"), null));
-        String text;
-        
-        while(true){
-            System.out.println("Write a sentence in either Japanese(romaji), English, or German");
-            text = get.nextLine();
-            System.out.println(a.getLaguage(text));
-        }
-        
-    }
-    
+
 
     public static void testWordNet() throws IOException{
         //String wnhome = System.getenv("C:\\Program Files (x86)\\WordNet\\2.1\\dict");

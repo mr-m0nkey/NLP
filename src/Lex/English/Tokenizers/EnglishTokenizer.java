@@ -186,12 +186,12 @@ public class EnglishTokenizer extends EnglishT implements Serializable{
     @Override
     public ArrayList<List<String>> getTokens(File file, Map<String, String> map) throws FileNotFoundException{
         
-                    List<String> temp = Collections.synchronizedList(new LinkedList<String>());
-                    String split = "\\s+";
+         String split = "\\s+";
                     if(map == null){
                         map = new HashMap();
             split = "";
         }
+                     List<String> temp = Collections.synchronizedList(new LinkedList<String>());
                     
                       ArrayList<List<String>> arr = new ArrayList();
 
@@ -199,19 +199,35 @@ public class EnglishTokenizer extends EnglishT implements Serializable{
         try (Scanner input = new Scanner(file)) {
             //temp.add("<s>");
             String tempString;
+            
             int count = 0;
             input.useDelimiter(split);
             while(input.hasNextLine()){
                 count++;
                 tempString = input.nextLine();
-                
 
-                for(String s : map.keySet()){
-                    tempString = tempString.replaceAll(s, map.get(s)).toLowerCase().trim();
+                tempString = tempString
+                        .replaceAll("'m", " am")
+                        .replaceAll("won't", "will not")
+                        .replaceAll("can't", "can not")
+                        .replaceAll("shan't", "shall not")
+                        .replaceAll("n't", " not")
+                        .replaceAll("'ll", " will")
+                        .replaceAll("'d", " would")
+                        .replace("!", " ! ")
+                        .replace("\\s+", " ")
+                        .replace("?", " ? ")
+                        .replace(".", " . ")
+                        .replace(",", " , ")
+                        .toLowerCase()
+                        .trim();
+                
+                  for(String s : map.keySet()){
+                    tempString = tempString.replaceAll(s, map.get(s));
                 }
                 
                 if(tempString.length() > 0){
-                    String[] a  = tempString.split("\\s+");
+                    String[] a  = tempString.split(split);
                     //temp.add("<s>");
                     for(int i = 0; i < a.length; i++){
                         temp.add(a[i]);
@@ -231,6 +247,7 @@ public class EnglishTokenizer extends EnglishT implements Serializable{
                 arr.add(temp);
             }
             return arr;
+       
     }
 
     

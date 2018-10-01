@@ -64,7 +64,7 @@ public class NgramProb implements ILanguageModel , Serializable{
             first = first.trim();
             second = second.trim();
             
-            //System.out.println("First: " + first + " Second: " + second + " Prob: " + prob(first, second, train));
+            //System.out.println("First: " + first + " Second: " + second + " Prob: " + prob(first, second));
             //System.out.println(vertices.get(first).edges.size());
             prob += Math.log(prob(first, second));
         }
@@ -86,6 +86,7 @@ public class NgramProb implements ILanguageModel , Serializable{
             }
         }
         t = t.trim();
+        
         if(!vertices.containsKey(t)){
             t = unk;
         }
@@ -99,6 +100,7 @@ public class NgramProb implements ILanguageModel , Serializable{
             if(vertices.get(t).edges.get(edge).getWeight() > vertices.get(t).edges.get(highest).getWeight()){
                 highest = edge;
             }
+            //System.out.println(highest);
             counter++;
         }
         //System.out.println("Token: " + t);
@@ -223,6 +225,7 @@ public class NgramProb implements ILanguageModel , Serializable{
             
             }
         }
+        //System.out.println(vertices.keySet());
     }
     
     /**

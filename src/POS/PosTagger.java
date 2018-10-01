@@ -42,7 +42,7 @@ public class PosTagger implements PosTagging, Serializable{
         sentences.forEach((List<String> sentence) -> { 
             List<String> tagSequence = new ArrayList();
             sentence.forEach((String token) -> {
-            if(token.equals("<s>") || token.equals("</s>")){
+            if(!token.contains("::")){
                 tagSequence.add(token);
                 if(!pos.contains(token)){
                    pos.add(token);

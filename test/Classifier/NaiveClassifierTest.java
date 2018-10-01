@@ -64,7 +64,7 @@ public class NaiveClassifierTest {
         ObjectInputStream input = new ObjectInputStream(new FileInputStream(file));
         NaiveClassifier classifier = (NaiveClassifier)input.readObject();
         File[] positive_test = new File("Training Data\\Corpus\\english\\movie reviews\\positive test").listFiles();
-      File[] negative_test = new File("Training Data\\Corpus\\english\\movie reviews\\negative test").listFiles();
+        File[] negative_test = new File("Training Data\\Corpus\\english\\movie reviews\\negative test").listFiles();
       
       double count = 0;
       double correct = 0;
@@ -89,10 +89,10 @@ public class NaiveClassifierTest {
     public void testddCreateClass() throws IOException, ClassNotFoundException {
         ObjectInputStream input = new ObjectInputStream(new FileInputStream(file));
         NaiveClassifier classifier = (NaiveClassifier)input.readObject();
-        File[] positive_test = new File("Training Data\\Corpus\\english\\movie reviews\\positive test").listFiles();
-        File[] negative_test = new File("Training Data\\Corpus\\english\\movie reviews\\negative test").listFiles();
-      
-        System.out.println(classifier.test("it was a good movie"));
+        
+        String review = "it was a good movie";
+        System.out.println(review);
+        System.out.println(classifier.test(review) + " review");
     }
     
     

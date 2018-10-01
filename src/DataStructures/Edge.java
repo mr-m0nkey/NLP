@@ -5,11 +5,13 @@
  */
 package DataStructures;
 
+import java.io.Serializable;
+
 /**
  * Represents a graph edge
  * @author mayowa
  */
-public class Edge {
+public class Edge implements Serializable{
     
     final private Vertex u;
     final private Vertex v;

@@ -63,6 +63,7 @@ public class EnglishTokenizerTest {
         sentence.add("</s>");
         expResult.add(sentence);
         ArrayList<List<String>> result = instance.getTokens(text);
+        System.out.println("String: " + text);
         System.out.println("Expected result: " + expResult);
         System.out.println("Result: " + result);
         assertEquals(expResult, result);
@@ -98,7 +99,7 @@ public class EnglishTokenizerTest {
     @Test
     public void testGetTokens_File() throws Exception {
         System.out.println("Test 3");
-        File file = new File("C:\\Users\\mayowa\\Documents\\NetBeansProjects\\NLP\\Training Data\\Corpus\\english\\tokenizer.txt");
+        File file = new File("C:\\Users\\mayowa\\Documents\\NetBeansProjects\\NLP\\Training Data\\Corpus\\english\\test.txt");
         ArrayList<List<String>> expResult = new ArrayList();
         List<String> sentence = new ArrayList();
         sentence.add("in");

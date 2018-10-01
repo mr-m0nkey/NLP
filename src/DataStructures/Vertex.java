@@ -5,6 +5,7 @@
  */
 package DataStructures;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import java.util.Map;
  * Represents a graph vertex
  * @author mayowa
  */
-public class Vertex {
+public class Vertex implements Serializable{
     
     private String token;
     private int count = 1;
