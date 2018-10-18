@@ -23,7 +23,7 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) throws FileNotFoundException{
-       pos();
+       langDet();
     }
     
     public static void langDet() throws FileNotFoundException{
