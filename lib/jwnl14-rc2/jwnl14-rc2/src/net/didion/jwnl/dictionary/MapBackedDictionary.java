@@ -106,7 +106,7 @@ public class MapBackedDictionary extends Dictionary {
 		for (Iterator typeItr = DictionaryFileType.getAllDictionaryFileTypes().iterator(); typeItr.hasNext();) {
 			DictionaryFileType fileType = (DictionaryFileType)typeItr.next();
 			DictionaryCatalog catalog = files.get(fileType);
-			for (Iterator posItr = POS.getAllPOS().iterator(); posItr.hasNext();) {
+			for (Iterator posItr = io.macaca.POS.getAllPOS().iterator(); posItr.hasNext();) {
 				POS pos = (POS)posItr.next();
 				_log.log(MessageLogLevel.INFO, "Loading " + pos + " " + fileType);
 				putTable(pos, fileType, loadDictFile(catalog.get(pos)));

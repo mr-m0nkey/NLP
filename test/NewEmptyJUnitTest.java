@@ -71,7 +71,7 @@ public class NewEmptyJUnitTest {
         dict.open();
 
         // look up first sense of the word "dog"
-        IIndexWord idxWord = dict.getIndexWord("is", POS.VERB);
+        IIndexWord idxWord = dict.getIndexWord("is", io.macaca.POS.VERB);
         IWordID wordID = idxWord.getWordIDs().get(0);
         IWord word = dict.getWord(wordID);
         System.out.println("Id = " + wordID);

@@ -55,7 +55,7 @@ public abstract class AbstractPrincetonDatabaseDictionaryElementFactory implemen
         while (pointers.next()) {
             PointerType type = PointerType.getPointerTypeForKey(pointers.getString(1));
             long targetOffset = pointers.getLong(2);
-            POS targetPOS = POS.getPOSForKey(pointers.getString(3));
+            POS targetPOS = io.macaca.POS.getPOSForKey(pointers.getString(3));
             int sourceIndex = pointers.getInt(4);
             int targetIndex = pointers.getInt(5);
             pointerList.add(new Pointer(proxy, sourceIndex, type, targetPOS, targetOffset, targetIndex));
@@ -90,7 +90,7 @@ public abstract class AbstractPrincetonDatabaseDictionaryElementFactory implemen
     }
 
     protected Word createWord(Synset synset, int index, String lemma) {
-        if (synset.getPOS().equals(POS.VERB)) {
+        if (synset.getPOS().equals(io.macaca.POS.VERB)) {
             return new MutableVerb(synset, index, lemma);
         } else {
             return new Word(synset, index, lemma);

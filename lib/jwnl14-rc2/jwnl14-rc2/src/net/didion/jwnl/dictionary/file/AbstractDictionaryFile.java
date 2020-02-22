@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Abstract implementation of <code>DictionaryFile</code>. This class
  * should be implemented for each file naming scheme used. It is assumed that each
- * file will be associated with both a POS and a file type (e.g. in the windows
+ * file will be associated with both a io.macaca.POS and a file type (e.g. in the windows
  * naming scheme, the verb index file is called "verb.idx").
  */
 public abstract class AbstractDictionaryFile implements DictionaryFile {
@@ -38,7 +38,7 @@ public abstract class AbstractDictionaryFile implements DictionaryFile {
 	/** Open the file at path <code>path</code> */
 	protected abstract void openFile(File file) throws IOException;
 
-	/** The POS associated with this file.*/
+	/** The io.macaca.POS associated with this file.*/
 	public POS getPOS() {
 		return _pos;
 	}

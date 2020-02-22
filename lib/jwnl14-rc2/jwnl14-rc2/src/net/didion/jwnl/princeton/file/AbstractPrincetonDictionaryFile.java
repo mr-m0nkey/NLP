@@ -29,10 +29,10 @@ public abstract class AbstractPrincetonDictionaryFile extends AbstractDictionary
 
 	static {
 		_posToExtMap = new HashMap(4, 1);
-		_posToExtMap.put(POS.NOUN, NOUN_EXT);
-		_posToExtMap.put(POS.VERB,  VERB_EXT);
-		_posToExtMap.put(POS.ADJECTIVE, ADJECTIVE_EXT);
-		_posToExtMap.put(POS.ADVERB, ADVERB_EXT);
+		_posToExtMap.put(io.macaca.POS.NOUN, NOUN_EXT);
+		_posToExtMap.put(io.macaca.POS.VERB,  VERB_EXT);
+		_posToExtMap.put(io.macaca.POS.ADJECTIVE, ADJECTIVE_EXT);
+		_posToExtMap.put(io.macaca.POS.ADVERB, ADVERB_EXT);
 
 		_fileTypeToFileNameMap = new HashMap(3, 1);
 		_fileTypeToFileNameMap.put(DictionaryFileType.INDEX, new FileNames("idx", "index"));

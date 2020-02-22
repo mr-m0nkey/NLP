@@ -68,7 +68,7 @@ public class Synset extends PointerTarget implements DictionaryElement {
 
 	// Object methods
 
-	/** Two Synsets are equal if their POS's and offsets are equal */
+	/** Two Synsets are equal if their io.macaca.POS's and offsets are equal */
 	public boolean equals(Object object) {
 		return (object instanceof Synset) && ((Synset) object).getPOS().equals(getPOS()) && ((Synset) object).getOffset() == getOffset();
 	}
@@ -158,8 +158,8 @@ public class Synset extends PointerTarget implements DictionaryElement {
 
 	private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
 		in.defaultReadObject();
-		// set POS to reference the static instance defined in the current runtime environment
-		_pos = POS.getPOSForKey(_pos.getKey());
+		// set io.macaca.POS to reference the static instance defined in the current runtime environment
+		_pos = io.macaca.POS.getPOSForKey(_pos.getKey());
 	}
 
 	/**

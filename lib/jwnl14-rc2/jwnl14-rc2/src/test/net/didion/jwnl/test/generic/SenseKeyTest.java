@@ -18,7 +18,7 @@ public class SenseKeyTest extends TestCase {
 	public void testSimpleSenseKey() {
 		try {
             JWNL.initialize(TestDefaults.getInputStream());
-            IndexWord word = Dictionary.getInstance().getIndexWord(POS.VERB, "get");
+            IndexWord word = Dictionary.getInstance().getIndexWord(io.macaca.POS.VERB, "get");
 			Synset[] syns = word.getSenses();
 			for (int i = 0; i < syns.length; i++) {
 				Synset syn = syns[i];

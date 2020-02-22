@@ -19,7 +19,7 @@ public class Wordnet21SynsetTest extends TestCase {
              */
             long offset = 4337089;
             
-            Synset syn = Dictionary.getInstance().getSynsetAt(POS.NOUN, offset);
+            Synset syn = Dictionary.getInstance().getSynsetAt(io.macaca.POS.NOUN, offset);
             
             boolean match = false;
             for (int i = 0; i < syn.getWords().length; i++) {

@@ -20,7 +20,7 @@ Changelog for edu.mit.jwi:
 Ver     : Release Date  : Changes
 =================================
 2.3.4   : Jul 10, 2015  : 1. Fixed Bug 024: Added IHasCharset interface implemented by IContentType, IDictionary, and IDataProvider; IDictionary/IDataProvider have setCharset methods
-                        : 2. Removed resolveXXXContentType methods from the DataSourceDictionary object, replacing them with IDataProvider.resolveContentType(IDataType, POS)
+                        : 2. Removed resolveXXXContentType methods from the DataSourceDictionary object, replacing them with IDataProvider.resolveContentType(IDataType, io.macaca.POS)
 ----------------------------------
 2.3.3   : Feb 12, 2014  : 1. Fixed Bug 023: RAMDictionary now properly handles underspecified word id objects
 ----------------------------------
@@ -30,7 +30,7 @@ Ver     : Release Date  : Changes
 ----------------------------------
 2.3.0   : Aug 28, 2013  : 1. Added IIndexWord.getPointers() method and IndexWord implementation thereof
                           2. Added two IndexWord constructors allowing setting of pointers field
-                          3. Added IndexWordParser.resolvePointer(String, POS) method and its use in the parseLine(String) method
+                          3. Added IndexWordParser.resolvePointer(String, io.macaca.POS) method and its use in the parseLine(String) method
                           4. Added Pointer.DOMAIN (symbol ';') and Pointer.MEMBER (symbol '-') so IndexWordParser.parseLine(String) doesn't throw an exception
 ----------------------------------
 2.2.6   : Jun 25, 2013  : 1. Fixed Bug 020
@@ -68,9 +68,9 @@ Ver     : Release Date  : Changes
                           10. Renamed IWordID.getSenseNumber() to getWordNumber()
 ----------------------------------
 2.1.5   : Dec 19, 2008  : 1. Added documentation that points from the ISenseKey interface to SenseKeyParser class
-                          2. Fixed Bug 011 (WordnetStemmer.findStems(String, POS))
+                          2. Fixed Bug 011 (WordnetStemmer.findStems(String, io.macaca.POS))
                           3. Make explicit that Dictionary class does no stemming, unlike Wordnet API
-                          4. Iterator returned by IDictionary.getExceptionEntryIterator(POS) now returns IExceptionEntry objects
+                          4. Iterator returned by IDictionary.getExceptionEntryIterator(io.macaca.POS) now returns IExceptionEntry objects
                           5. Added catch and warning for linefeed corrupted data files
 ---------------------------------
 2.1.4   : Sep 11, 2008  : 1. Moved SenseKey.parseKey(String) to its own class, SenseKeyParser, for ease of modification
@@ -79,7 +79,7 @@ Ver     : Release Date  : Changes
                           4. Modified SenseKeyParser and DataLineParser so they use UnknownLexFile class rather than throw NullPointerException on non-standard lexical file
                           5. Fixed Bug 010 (Dictionary.getExceptionEntry(IExceptionEntryID) method)
                           6. Replaced Pattern.quote(String) in Version class with string concatenation with \Q and \E for compatibility with GCJ 4.2
-                          7. Fixed javadoc SimpleStemmer.findStems(String, POS) that erroneously stated it would return null if no roots are found; it actually returns the empty list
+                          7. Fixed javadoc SimpleStemmer.findStems(String, io.macaca.POS) that erroneously stated it would return null if no roots are found; it actually returns the empty list
                           8. Refactored IWordID.getNumber() to IWordID.getSenseNumber() to make this call clearer.
                           9. Tested JWI with Rion Snow's Augmented Wordnets 2.1 +10k, +20k, +30k, and +40k (downloaded 9/11/08).  Snow's files have errors in them that cause certain problems, but it works for the most part with JWI.
 ---------------------------------
@@ -98,8 +98,8 @@ Ver     : Release Date  : Changes
                               b) Modified IndexWord#hashCode() and IndexWord#equals(Object)
                               c) Modified IndexDataLineParser#parseLine(String line)
                           9. Added IStemmer interface
-                              a) Combined getRoots(String) with getRoots(String, POS)
-                              b) Renamed getRoots(String, POS) methods to findStems(String, POS)
+                              a) Combined getRoots(String) with getRoots(String, io.macaca.POS)
+                              b) Renamed getRoots(String, io.macaca.POS) methods to findStems(String, io.macaca.POS)
 ---------------------------------
 2.1.1 : Jan 26, 2008    : 1. Fixed Bug 008 (SynsetID.hashCode() method)
 ---------------------------------
@@ -162,7 +162,7 @@ Ver     : Release Date  : Changes
                               a) Renamed WordnetPointerType to Pointer
                               b) Renamed IPointerType to IPointer
                               c) Separated PERTAINYM and DERIVED_ADJ pointers
-                              d) Renamed PartOfSpeech to POS
+                              d) Renamed PartOfSpeech to io.macaca.POS
                               e) Renamed IHasPartOfSpeech to IHasPOS
                               f) Added support for retrieving lexical file numbers to ISynset
                               g) Added support for retrieving lexical ids to IWord

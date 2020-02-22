@@ -15,7 +15,7 @@ public class DatabaseIndexWordTest extends TestCase {
         
     JWNL.initialize(TestDefaults.getInputStream());
          
-    IndexWord iw = Dictionary.getInstance().getIndexWord(POS.NOUN, "tank");
+    IndexWord iw = Dictionary.getInstance().getIndexWord(io.macaca.POS.NOUN, "tank");
     
     Synset[] senses = iw.getSenses();
     assertTrue(senses.length > 0);

@@ -90,7 +90,7 @@ public final class PointerUtils {
 	/** Find all antonyms of <code>synset</code>, and all synonyms of those antonyms to depth <code>depth</code>. */
 	public PointerTargetTree getExtendedAntonyms(Synset synset, int depth) throws JWNLException {
 		PointerTargetTreeNodeList list = new PointerTargetTreeNodeList();
-		if (synset.getPOS() == POS.ADJECTIVE) {
+		if (synset.getPOS() == io.macaca.POS.ADJECTIVE) {
 			PointerTargetNodeList antonyms = getAntonyms(synset);
 			list = makePointerTargetTreeList(antonyms, PointerType.SIMILAR_TO, PointerType.ANTONYM, depth, false);
 		}
@@ -105,7 +105,7 @@ public final class PointerUtils {
 	/** Get the antonyms of all words that mean the same as <code>synset</code> to depth <code>depth</code>.*/
 	public PointerTargetTree getIndirectAntonyms(Synset synset, int depth) throws JWNLException {
 		PointerTargetTreeNodeList list = new PointerTargetTreeNodeList();
-		if (synset.getPOS() == POS.ADJECTIVE) {
+		if (synset.getPOS() == io.macaca.POS.ADJECTIVE) {
 			PointerTargetNodeList synonyms = getSynonyms(synset);
 			list = makePointerTargetTreeList(synonyms, PointerType.ANTONYM, PointerType.ANTONYM, depth, false);
 		}

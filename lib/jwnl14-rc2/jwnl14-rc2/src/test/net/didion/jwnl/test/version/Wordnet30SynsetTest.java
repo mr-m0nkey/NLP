@@ -20,7 +20,7 @@ public class Wordnet30SynsetTest extends TestCase {
              */
             long offset = 4389033;
             
-            Synset syn = Dictionary.getInstance().getSynsetAt(POS.NOUN, offset);
+            Synset syn = Dictionary.getInstance().getSynsetAt(io.macaca.POS.NOUN, offset);
             System.out.println("Synset: " + syn.toString());
             boolean match = false;
             for (int i = 0; i < syn.getWords().length; i++) {
@@ -51,17 +51,17 @@ public class Wordnet30SynsetTest extends TestCase {
     public void testGetWordSenses() {
         try {
             JWNL.initialize(TestDefaults.getInputStream());
-            IndexWord word = Dictionary.getInstance().getIndexWord(POS.NOUN, "tank");
+            IndexWord word = Dictionary.getInstance().getIndexWord(io.macaca.POS.NOUN, "tank");
       
             assertTrue(word.getSenseCount() == 5); 
             
-            word = Dictionary.getInstance().getIndexWord(POS.VERB, "eat");
+            word = Dictionary.getInstance().getIndexWord(io.macaca.POS.VERB, "eat");
             assertTrue(word.getSenseCount() == 6); 
             
-            word = Dictionary.getInstance().getIndexWord(POS.ADJECTIVE, "quick");
+            word = Dictionary.getInstance().getIndexWord(io.macaca.POS.ADJECTIVE, "quick");
             assertTrue(word.getSenseCount() == 6); 
             
-            word = Dictionary.getInstance().getIndexWord(POS.ADJECTIVE, "big");
+            word = Dictionary.getInstance().getIndexWord(io.macaca.POS.ADJECTIVE, "big");
             assertTrue(word.getSenseCount() == 13); 
             
         } catch(JWNLException e) {

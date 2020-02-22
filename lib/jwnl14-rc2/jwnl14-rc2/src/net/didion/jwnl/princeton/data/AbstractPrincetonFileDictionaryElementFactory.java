@@ -93,7 +93,7 @@ public abstract class AbstractPrincetonFileDictionaryElementFactory implements F
             String pt = tokenizer.nextToken();
             PointerType pointerType = PointerType.getPointerTypeForKey(pt);
             long targetOffset = tokenizer.nextLong();
-            POS targetPOS = POS.getPOSForKey(tokenizer.nextToken());
+            POS targetPOS = io.macaca.POS.getPOSForKey(tokenizer.nextToken());
             int linkIndices = tokenizer.nextHexInt();
             int sourceIndex = linkIndices / 256;
             int targetIndex = linkIndices & 255;
@@ -102,7 +102,7 @@ public abstract class AbstractPrincetonFileDictionaryElementFactory implements F
             pointers[i] = new Pointer(source, i, pointerType, targetPOS, targetOffset, targetIndex);
         }
 
-        if (pos == POS.VERB) {
+        if (pos == io.macaca.POS.VERB) {
             int verbFrameCount = tokenizer.nextInt();
             for (int i = 0; i < verbFrameCount; i++) {
                 tokenizer.nextToken();	// "+"
@@ -148,7 +148,7 @@ public abstract class AbstractPrincetonFileDictionaryElementFactory implements F
 	 */
 	protected Word createWord(Synset synset, int index, String lemma) {
 		Word word; 
-		if (synset.getPOS().equals(POS.VERB)) {
+		if (synset.getPOS().equals(io.macaca.POS.VERB)) {
             word = new MutableVerb(synset, index, lemma);
         } else {
             word = new Word(synset, index, lemma);

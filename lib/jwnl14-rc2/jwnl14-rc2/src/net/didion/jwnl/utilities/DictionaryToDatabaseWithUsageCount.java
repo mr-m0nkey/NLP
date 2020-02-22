@@ -181,8 +181,8 @@ public class DictionaryToDatabaseWithUsageCount
     }
 
     /**
-     * Inserts the data into the database. Iterates through the various POS, 
-     * then stores all the index words, synsets, exceptions of that POS. 
+     * Inserts the data into the database. Iterates through the various io.macaca.POS,
+     * then stores all the index words, synsets, exceptions of that io.macaca.POS.
      * @throws Exception
      */
     public void insertData()
@@ -190,7 +190,7 @@ public class DictionaryToDatabaseWithUsageCount
     {
         TIME = System.currentTimeMillis();
         POS pos;
-        for(Iterator posItr = POS.getAllPOS().iterator(); posItr.hasNext(); LOG.log(MessageLogLevel.INFO, "done inserting data for pos " + pos))
+        for(Iterator posItr = io.macaca.POS.getAllPOS().iterator(); posItr.hasNext(); LOG.log(MessageLogLevel.INFO, "done inserting data for pos " + pos))
         {
             pos = (POS)posItr.next();
             LOG.log(MessageLogLevel.INFO, "inserting data for pos " + pos);

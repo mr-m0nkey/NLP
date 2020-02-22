@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Lex.English.Tokenizers;
+package io.macaca.Lex.English.Tokenizers;
 
 import java.io.File;
 import java.util.ArrayList;

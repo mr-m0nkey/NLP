@@ -22,7 +22,7 @@ public class PrincetonWN16FileDictionaryElementFactory extends AbstractPrinceton
 	}
 
 	protected Word createWord(Synset synset, int index, String lemma) {
-		if (synset.getPOS().equals(POS.ADJECTIVE)) {
+		if (synset.getPOS().equals(io.macaca.POS.ADJECTIVE)) {
 			Adjective.AdjectivePosition adjectivePosition = Adjective.NONE;
 			if (lemma.charAt(lemma.length() - 1) == ')' && lemma.indexOf('(') > 0) {
 				int lparen = lemma.indexOf('(');

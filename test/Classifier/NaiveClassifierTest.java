@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Classifier;
+package io.macaca.Classifier;
 
-import Lex.English.Tokenizers.EnglishTokenizer;
+import io.macaca.Lex.English.Tokenizers.EnglishTokenizer;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

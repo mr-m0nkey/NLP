@@ -52,11 +52,11 @@ public class Examples {
 	private String MORPH_PHRASE = "running-away";
 
 	public Examples() throws JWNLException {
-		ACCOMPLISH = Dictionary.getInstance().getIndexWord(POS.VERB, "accomplish");
-		DOG = Dictionary.getInstance().getIndexWord(POS.NOUN, "dog");
-		CAT = Dictionary.getInstance().lookupIndexWord(POS.NOUN, "cat");
-		FUNNY = Dictionary.getInstance().lookupIndexWord(POS.ADJECTIVE, "funny");
-		DROLL = Dictionary.getInstance().lookupIndexWord(POS.ADJECTIVE, "droll");
+		ACCOMPLISH = Dictionary.getInstance().getIndexWord(io.macaca.POS.VERB, "accomplish");
+		DOG = Dictionary.getInstance().getIndexWord(io.macaca.POS.NOUN, "dog");
+		CAT = Dictionary.getInstance().lookupIndexWord(io.macaca.POS.NOUN, "cat");
+		FUNNY = Dictionary.getInstance().lookupIndexWord(io.macaca.POS.ADJECTIVE, "funny");
+		DROLL = Dictionary.getInstance().lookupIndexWord(io.macaca.POS.ADJECTIVE, "droll");
 	}
 
 	public void go() throws JWNLException {
@@ -73,7 +73,7 @@ public class Examples {
 		// is not stemmed. So we have to both remove the hyphen and stem
 		// "running" before we get to an entry that is in WordNet
 		System.out.println("Base form for \"" + phrase + "\": " +
-		                   Dictionary.getInstance().lookupIndexWord(POS.VERB, phrase));
+		                   Dictionary.getInstance().lookupIndexWord(io.macaca.POS.VERB, phrase));
 	}
 
 	private void demonstrateListOperation(IndexWord word) throws JWNLException {

@@ -49,7 +49,7 @@ changes from version 1.1 to version 1.2
 - Shortened the names of the Princeton classes 
 - Made the dictionary path a parameter for file-based dictionaries rather than a parameter of version
 - Added clearCache() and clearCache(DictionaryFileType) methods to AbstractCachingDictionary
-- Reversed the key types of DictionaryCatalog and DictionaryCatalogSet so that DictionaryCatalog stores files by POS for a file type and DictionaryCatalogSet stores DictionaryCatalogs by file type
+- Reversed the key types of DictionaryCatalog and DictionaryCatalogSet so that DictionaryCatalog stores files by io.macaca.POS for a file type and DictionaryCatalogSet stores DictionaryCatalogs by file type
 - Changed DictionaryToMap to clear the cache for a file type after processing all the files of that type
 - Got rid of the CacheSet.CacheKey class...it was pretty useless and unnecessary
 - Fixed a bug in which "ches" endings were being stemmed to "c" instead of "ch"

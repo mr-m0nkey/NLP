@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * Simple container for <code>DictionaryCatalog</code>s that allows
- * a <code>DictionaryFile</code> to be retrieved by its <code>POS</code>
+ * a <code>DictionaryFile</code> to be retrieved by its <code>io.macaca.POS</code>
  * and <code>DictionaryFileType</code>.
  */
 public class DictionaryCatalogSet {

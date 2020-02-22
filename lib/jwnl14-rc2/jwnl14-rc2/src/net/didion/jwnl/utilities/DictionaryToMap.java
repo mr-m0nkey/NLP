@@ -58,7 +58,7 @@ public class DictionaryToMap
         {
             DictionaryFileType fileType = (DictionaryFileType)typeItr.next();
             POS pos;
-            for(Iterator posItr = POS.getAllPOS().iterator(); posItr.hasNext(); serialize(pos, fileType))
+            for(Iterator posItr = io.macaca.POS.getAllPOS().iterator(); posItr.hasNext(); serialize(pos, fileType))
             {
                 pos = (POS)posItr.next();
                 System.out.println("Converting " + pos + " " + fileType + " file...");

@@ -19,7 +19,7 @@ public abstract class PointerTarget implements Serializable {
 	protected PointerTarget() {
 	}
 
-	/** Return this target's POS */
+	/** Return this target's io.macaca.POS */
 	public abstract POS getPOS();
 
 	/** Return a list of Target's pointers */

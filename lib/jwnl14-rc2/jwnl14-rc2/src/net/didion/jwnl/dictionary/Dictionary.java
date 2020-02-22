@@ -136,7 +136,7 @@ public abstract class Dictionary implements Installable {
 	}
 
 	/**
-	 * Main word lookup procedure. First try a normal lookup. If that doesn't work,
+	 * io.macaca.Main word lookup procedure. First try a normal lookup. If that doesn't work,
 	 * try looking up the stemmed form of the lemma.
 	 * @param pos the part-of-speech of the word to look up
 	 * @param lemma the lemma to look up
@@ -161,7 +161,7 @@ public abstract class Dictionary implements Installable {
 	public IndexWordSet lookupAllIndexWords(String lemma) throws JWNLException {
 		lemma = prepareQueryString(lemma);
 		IndexWordSet set = new IndexWordSet(lemma);
-		for (Iterator itr = POS.getAllPOS().iterator(); itr.hasNext();) {
+		for (Iterator itr = io.macaca.POS.getAllPOS().iterator(); itr.hasNext();) {
 			IndexWord current = lookupIndexWord((POS)itr.next(), lemma);
 			if (current != null) set.add(current);
 		}

@@ -25,7 +25,7 @@ public interface DictionaryFile {
 	/** Return true if the file is open */
 	public boolean isOpen();
 
-	/** The POS associated with this file.*/
+	/** The io.macaca.POS associated with this file.*/
 	public POS getPOS();
 
 	public File getFile();

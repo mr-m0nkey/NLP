@@ -31,7 +31,7 @@ public class DetachSuffixesOperation extends AbstractDelegatingOperation {
         Map suffixMap = new HashMap();
 		for (Iterator itr = params.values().iterator(); itr.hasNext();) {
 			Param p = (Param) itr.next();
-            POS pos = POS.getPOSForLabel(p.getName());
+            POS pos = io.macaca.POS.getPOSForLabel(p.getName());
             if (pos != null) {
                 suffixMap.put(pos, getSuffixArray(p.getValue()));
             }

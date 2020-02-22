@@ -12,7 +12,7 @@ public class ExamplesTest extends TestCase {
 	public void testMorphological() {
 		try {  
 			JWNL.initialize(TestDefaults.getInputStream());
-			IndexWord iw = Dictionary.getInstance().lookupIndexWord(POS.VERB, "running-away");
+			IndexWord iw = Dictionary.getInstance().lookupIndexWord(io.macaca.POS.VERB, "running-away");
           
 			System.out.println("Index word : " + iw.toString());
 			

@@ -18,8 +18,8 @@ public class AntonymRelationshipTest extends TestCase {
    public void testSimpleSenseKey() {
         try {
             JWNL.initialize(TestDefaults.getInputStream());
-            IndexWord beautiful = Dictionary.getInstance().getIndexWord(POS.ADJECTIVE, "beautiful");
-            IndexWord ugly = Dictionary.getInstance().getIndexWord(POS.ADJECTIVE, "ugly");
+            IndexWord beautiful = Dictionary.getInstance().getIndexWord(io.macaca.POS.ADJECTIVE, "beautiful");
+            IndexWord ugly = Dictionary.getInstance().getIndexWord(io.macaca.POS.ADJECTIVE, "ugly");
             
             Synset[] bea = beautiful.getSenses();
             Synset beaSynset = bea[0];

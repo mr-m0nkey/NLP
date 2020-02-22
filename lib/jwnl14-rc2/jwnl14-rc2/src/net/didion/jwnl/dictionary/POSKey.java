@@ -8,7 +8,7 @@ import net.didion.jwnl.JWNL;
 import net.didion.jwnl.JWNLRuntimeException;
 import net.didion.jwnl.data.POS;
 
-/** A cache key consists of a <code>POS</code> and an object */
+/** A cache key consists of a <code>io.macaca.POS</code> and an object */
 public class POSKey {
 	private POS _pos;
 	private Object _key;

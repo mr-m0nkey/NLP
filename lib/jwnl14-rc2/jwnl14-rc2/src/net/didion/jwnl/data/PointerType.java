@@ -20,7 +20,7 @@ import java.util.*;
  */
 public final class PointerType implements Serializable {
 	static final long serialVersionUID = 220886251671304256L;
-	// Flags for tagging a pointer type with the POS types it apples to.
+	// Flags for tagging a pointer type with the io.macaca.POS types it apples to.
 	private static final int N = 1;
 	private static final int V = 2;
 	private static final int ADJ = 4;
@@ -89,10 +89,10 @@ public final class PointerType implements Serializable {
 
     public static void initialize() {
         if (!_initialized) {
-            POS_TO_MASK_MAP.put(POS.NOUN, new Integer(N));
-            POS_TO_MASK_MAP.put(POS.VERB, new Integer(V));
-            POS_TO_MASK_MAP.put(POS.ADJECTIVE, new Integer(ADJ));
-            POS_TO_MASK_MAP.put(POS.ADVERB, new Integer(ADV));
+            POS_TO_MASK_MAP.put(io.macaca.POS.NOUN, new Integer(N));
+            POS_TO_MASK_MAP.put(io.macaca.POS.VERB, new Integer(V));
+            POS_TO_MASK_MAP.put(io.macaca.POS.ADJECTIVE, new Integer(ADJ));
+            POS_TO_MASK_MAP.put(io.macaca.POS.ADVERB, new Integer(ADV));
 
             for (Iterator itr = ALL_TYPES.iterator(); itr.hasNext();) {
                 PointerType pt = (PointerType) itr.next();

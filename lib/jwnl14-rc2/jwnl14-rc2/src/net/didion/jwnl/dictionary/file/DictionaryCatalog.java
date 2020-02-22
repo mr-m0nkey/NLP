@@ -15,7 +15,7 @@ import net.didion.jwnl.data.POS;
 
 /**
  * A container for the files associated with a catalog (the index, data, and exception
- * files associated with a POS).
+ * files associated with a io.macaca.POS).
  */
 public class DictionaryCatalog {
 	private Map _files = new HashMap();
@@ -26,7 +26,7 @@ public class DictionaryCatalog {
 		try {
 			Constructor c = dictionaryFileType.getConstructor(new Class[0]);
 			DictionaryFile factory = (DictionaryFile) c.newInstance(null);
-			for (Iterator itr = POS.getAllPOS().iterator(); itr.hasNext();) {
+			for (Iterator itr = io.macaca.POS.getAllPOS().iterator(); itr.hasNext();) {
 				DictionaryFile file = factory.newInstance(path, (POS)itr.next(), fileType);
 				_files.put(file.getPOS(), file);
 			}

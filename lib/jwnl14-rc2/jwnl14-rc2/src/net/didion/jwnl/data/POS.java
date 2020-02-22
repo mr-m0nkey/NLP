@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * Instances of this class enumerate the possible major syntactic categories, or
- * <b>P</b>art's <b>O</b>f <b>S</b>peech. Each <code>POS</code> has a human-readable
+ * <b>P</b>art's <b>O</b>f <b>S</b>peech. Each <code>io.macaca.POS</code> has a human-readable
  * label that can be used to print it, and a key by which it can be looked up.
  */
 public final class POS implements Serializable {
@@ -34,8 +34,8 @@ public final class POS implements Serializable {
 	}
 
 	/**
-	 * Return the <code>POS</code> whose key matches <var>label</var>,
-	 * or null if the label does not match any POS.
+	 * Return the <code>io.macaca.POS</code> whose key matches <var>label</var>,
+	 * or null if the label does not match any io.macaca.POS.
 	 */
 	public static POS getPOSForLabel(String label) {
 		for (Iterator itr = ALL_POS.iterator(); itr.hasNext();) {
@@ -48,8 +48,8 @@ public final class POS implements Serializable {
 	}
 
 	/**
-	 * Return the <code>POS</code> whose key matches <var>key</var>,
-	 * or null if the key does not match any POS.
+	 * Return the <code>io.macaca.POS</code> whose key matches <var>key</var>,
+	 * or null if the key does not match any io.macaca.POS.
 	 */
 	public static POS getPOSForKey(String key) {
 		for (Iterator itr = ALL_POS.iterator(); itr.hasNext();) {

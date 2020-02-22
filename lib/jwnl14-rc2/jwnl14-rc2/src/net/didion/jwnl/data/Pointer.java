@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /**
- * A <code>Pointer</code> encodes a lexical or semantic relationship between WordNet entities.  A lexical
+ * A <code>Pointer</code> encodes a lexical or semantic relationship between WordNet io.macaca.entities.  A lexical
  * relationship holds between Words; a semantic relationship holds between Synsets.  Relationships
  * are <it>directional</it>:  the two roles of a relationship are the <it>source</it> and <it>target</it>.
  * Relationships are <it>typed</it>: the type of a relationship is a {@link PointerType}, and can
@@ -161,8 +161,8 @@ public class Pointer implements Serializable {
 
 		private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
 			in.defaultReadObject();
-			// set POS to reference the static instance defined in the current runtime environment
-			_pos = POS.getPOSForKey(_pos.getKey());
+			// set io.macaca.POS to reference the static instance defined in the current runtime environment
+			_pos = io.macaca.POS.getPOSForKey(_pos.getKey());
 		}
 	}
 }
