@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.macaca.Classifier;
+package io.macaca.test.Classifier;
 
+import io.macaca.Classifier.NaiveClassifier;
 import io.macaca.Lex.English.Tokenizers.EnglishTokenizer;
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,7 +31,7 @@ public class NaiveClassifierTest {
         file = new File("C:\\Users\\mayowa\\Documents\\NetBeansProjects\\NLP\\Training Data\\DAT files\\classifier.dat");
         if(!file.exists()){
             EnglishTokenizer a = new EnglishTokenizer();  
-            NaiveClassifier reviews = new NaiveClassifier("Reviews"); 
+            NaiveClassifier reviews = new NaiveClassifier("Reviews");
             reviews.createClass("Positive");
             reviews.createClass("Negative");
             File[] positive = new File("Training Data\\Corpus\\english\\movie reviews\\pos").listFiles();

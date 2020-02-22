@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.macaca.Lex.English.Tokenizers;
+package io.macaca.test.Tokenizers;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import static junit.framework.Assert.assertEquals;
+
+import io.macaca.Lex.English.Tokenizers.EnglishTokenizer;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

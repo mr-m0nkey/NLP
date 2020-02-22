@@ -1,4 +1,4 @@
-package languagedetection;
+package io.macaca.test.languagedetection;
 
 import io.macaca.Lex.English.Tokenizers.EnglishTokenizer;
 import io.macaca.POS.PosTagger;
